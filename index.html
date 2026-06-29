@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta name="theme-color" content="#6B0F1A" />
+  <meta name="description" content="Wedding Invitation — Yash &amp; Sakshi, 9th July 2026" />
+  <title>Yash &amp; Sakshi — Wedding Invitation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Great+Vibes&family=Noto+Serif:ital,wght@0,400;0,600;1,400&family=Noto+Serif+Devanagari:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red:        #6B0F1A;
+      --dark-red:   #3D0A10;
+      --gold:       #D4AF37;
+      --gold-light: #F5D76E;
+      --gold-dark:  #A0832A;
+      --cream:      #FDF6E3;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      background: var(--dark-red);
+      font-family: 'Noto Serif', serif;
+      overflow-x: hidden;
+    }
+
+    /* ════════════════════════════════
+       GANESHA INTRO OVERLAY
+    ════════════════════════════════ */
+    #intro {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at center, #5A0E18 0%, #2D0408 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      text-align: center;
+      padding: 24px;
+      transition: opacity 1.2s ease;
+    }
+    #intro.fade-out { opacity: 0; pointer-events: none; }
+
+    .intro-ganesha-wrap {
+      position: relative;
+      margin-bottom: 24px;
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-10px); }
+    }
+
+    .intro-halo {
+      position: absolute;
+      inset: -20px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(212,175,55,0.25) 0%, transparent 70%);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1);    opacity: 0.6; }
+      50%       { transform: scale(1.15); opacity: 1; }
+    }
+
+    .intro-ganesha-svg { position: relative; z-index: 1; }
+
+    .intro-om {
+      font-family: 'Noto Serif Devanagari', serif;
+      font-size: clamp(2.2rem, 9vw, 4.5rem);
+      color: var(--gold-light);
+      text-shadow: 0 0 30px rgba(245,215,110,0.8);
+      line-height: 1;
+      margin-bottom: 8px;
+      animation: glow-pulse 2s ease-in-out infinite;
+    }
+    @keyframes glow-pulse {
+      0%, 100% { text-shadow: 0 0 20px rgba(212,175,55,0.7); }
+      50%       { text-shadow: 0 0 50px rgba(245,215,110,1), 0 0 80px rgba(212,175,55,0.5); }
+    }
+
+    .intro-blessing {
+      font-family: 'Noto Serif Devanagari', serif;
+      font-size: clamp(1rem, 4vw, 1.6rem);
+      color: var(--cream);
+      letter-spacing: 3px;
+      margin-bottom: 18px;
+    }
+
+    .intro-bar {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(0.85rem, 3vw, 1.3rem);
+      color: var(--gold);
+      letter-spacing: 5px;
+      border-top: 1px solid var(--gold-dark);
+      border-bottom: 1px solid var(--gold-dark);
+      padding: 10px 36px;
+      margin-bottom: 30px;
+    }
+
+    .intro-dots { display: flex; gap: 10px; justify-content: center; }
+    .intro-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--gold-dark); }
+    .intro-dot:nth-child(1) { animation: dot-light 3s 0.0s forwards; }
+    .intro-dot:nth-child(2) { animation: dot-light 3s 0.5s forwards; }
+    .intro-dot:nth-child(3) { animation: dot-light 3s 1.0s forwards; }
+    .intro-dot:nth-child(4) { animation: dot-light 3s 1.5s forwards; }
+    .intro-dot:nth-child(5) { animation: dot-light 3s 2.0s forwards; }
+    @keyframes dot-light {
+      0%   { background: var(--gold-dark); box-shadow: none; }
+      100% { background: var(--gold-light); box-shadow: 0 0 8px var(--gold); }
+    }
+
+    /* ════════════════════════════════
+       FALLING PETALS
+    ════════════════════════════════ */
+    .petal {
+      position: fixed;
+      top: -30px;
+      width: 12px;
+      height: 18px;
+      border-radius: 50% 10% 50% 10%;
+      pointer-events: none;
+      z-index: 1;
+      animation: petal-fall linear infinite;
+    }
+    @keyframes petal-fall {
+      0%   { transform: translateY(0) rotate(0deg) scale(1);     opacity: 0.85; }
+      80%  { opacity: 0.6; }
+      100% { transform: translateY(110vh) rotate(540deg) scale(0.8); opacity: 0; }
+    }
+
+    /* ════════════════════════════════
+       PAGE WRAPPER
+    ════════════════════════════════ */
+    .page-wrapper {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 48px 16px 90px;
+      background:
+        radial-gradient(ellipse at top,    rgba(212,175,55,0.07) 0%, transparent 55%),
+        radial-gradient(ellipse at bottom, rgba(212,175,55,0.04) 0%, transparent 55%),
+        linear-gradient(180deg, #2D0408 0%, #5A0E18 35%, #4A0B14 70%, #2D0408 100%);
+    }
+
+    /* ════════════════════════════════
+       CARD
+    ════════════════════════════════ */
+    .card {
+      width: 100%;
+      max-width: 680px;
+      position: relative;
+      background: linear-gradient(155deg, #550D18 0%, #3D0A10 45%, #4A0B14 100%);
+      padding: 8px;
+      border: 2px solid var(--gold-dark);
+      box-shadow:
+        0 0 0 5px var(--dark-red),
+        0 0 0 7px var(--gold-dark),
+        0 0 0 12px var(--dark-red),
+        0 0 0 13px rgba(212,175,55,0.22),
+        0 30px 80px rgba(0,0,0,0.7);
+      animation: card-rise 1s ease 4.2s both;
+    }
+    @keyframes card-rise {
+      from { opacity: 0; transform: translateY(40px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .card::before, .card::after {
+      position: absolute;
+      font-size: 1.3rem;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .card::before { content: '\2736'; top: 16px;  left: 16px; }
+    .card::after  { content: '\2736'; top: 16px;  right: 16px; }
+
+    .card-inner {
+      position: relative;
+      border: 1px solid rgba(212,175,55,0.35);
+      padding: 36px 28px 48px;
+    }
+    .card-inner::before { content: '\2736'; position: absolute; bottom: 20px; left: 12px;  font-size: 0.9rem; color: var(--gold-dark); }
+    .card-inner::after  { content: '\2736'; position: absolute; bottom: 20px; right: 12px; font-size: 0.9rem; color: var(--gold-dark); }
+
+    /* ════════════════════════════════
+       OM + HEADING
+    ════════════════════════════════ */
+    .om-section { text-align: center; margin-bottom: 4px; }
+    .om-symbol {
+      display: block;
+      font-family: 'Noto Serif Devanagari', serif;
+      font-size: clamp(2.8rem, 9vw, 4.5rem);
+      color: var(--gold-light);
+      line-height: 1;
+      filter: drop-shadow(0 0 12px rgba(212,175,55,0.7));
+      animation: glow-pulse 3s ease-in-out infinite;
+    }
+    .shubh-vivah {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(0.75rem, 2.5vw, 1.1rem);
+      color: var(--gold);
+      letter-spacing: 7px;
+      text-transform: uppercase;
+      margin-top: 6px;
+    }
+
+    /* ════════════════════════════════
+       DIVIDERS
+    ════════════════════════════════ */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 18px 0;
+    }
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-dark), transparent);
+    }
+    .divider-icon { color: var(--gold); font-size: 1.1rem; }
+
+    /* ════════════════════════════════
+       MANDALA
+    ════════════════════════════════ */
+    .mandala-wrap { display: flex; justify-content: center; margin: -4px 0 8px; }
+    .mandala-svg {
+      width: clamp(100px, 30vw, 160px);
+      height: clamp(100px, 30vw, 160px);
+      animation: spin-slow 30s linear infinite;
+    }
+    @keyframes spin-slow {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    /* ════════════════════════════════
+       COUPLE NAMES
+    ════════════════════════════════ */
+    .couple-section { text-align: center; padding: 6px 0; }
+    .name {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(3.2rem, 13vw, 5.5rem);
+      color: var(--gold-light);
+      text-shadow: 0 2px 16px rgba(212,175,55,0.4);
+      line-height: 1.1;
+      display: block;
+      animation: name-shimmer 4s ease-in-out infinite;
+    }
+    @keyframes name-shimmer {
+      0%, 100% { text-shadow: 0 2px 16px rgba(212,175,55,0.4); }
+      50%       { text-shadow: 0 2px 30px rgba(245,215,110,0.8), 0 0 60px rgba(212,175,55,0.3); }
+    }
+    .and-symbol {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(2rem, 8vw, 3.5rem);
+      color: var(--cream);
+      opacity: 0.65;
+      display: block;
+      line-height: 1;
+      margin: -6px 0;
+    }
+
+    /* ════════════════════════════════
+       EVENT DETAILS
+    ════════════════════════════════ */
+    .event-section { text-align: center; }
+    .event-label {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(0.65rem, 2vw, 0.9rem);
+      color: var(--gold);
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .event-grid { display: flex; justify-content: center; flex-wrap: wrap; }
+    .event-item {
+      flex: 1;
+      min-width: 90px;
+      padding: 14px 10px;
+      border-right: 1px solid rgba(212,175,55,0.25);
+    }
+    .event-item:last-child { border-right: none; }
+    .ei-label {
+      font-size: 0.6rem;
+      color: var(--gold-dark);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+    .ei-value {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(0.75rem, 2.5vw, 1rem);
+      color: var(--cream);
+      margin-top: 6px;
+      line-height: 1.35;
+    }
+
+    /* ════════════════════════════════
+       VENUE
+    ════════════════════════════════ */
+    .venue-section {
+      text-align: center;
+      padding: 18px 12px;
+      background: rgba(0,0,0,0.22);
+      border: 1px solid rgba(212,175,55,0.18);
+      border-radius: 3px;
+    }
+    .venue-icon { font-size: 1.5rem; }
+    .venue-name {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(1rem, 3.5vw, 1.35rem);
+      color: var(--gold-light);
+      margin: 8px 0 6px;
+      line-height: 1.3;
+    }
+    .venue-address {
+      font-size: clamp(0.8rem, 2.5vw, 0.95rem);
+      color: var(--cream);
+      opacity: 0.8;
+      font-style: italic;
+      line-height: 1.6;
+    }
+
+    /* ════════════════════════════════
+       COUNTDOWN
+    ════════════════════════════════ */
+    .countdown-section { text-align: center; }
+    .cd-label {
+      font-size: 0.65rem;
+      color: var(--gold-dark);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .cd-grid { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
+    .cd-box {
+      background: rgba(0,0,0,0.3);
+      border: 1px solid var(--gold-dark);
+      border-radius: 4px;
+      padding: 12px 14px;
+      min-width: 68px;
+      position: relative;
+      overflow: hidden;
+    }
+    .cd-box::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-dark), transparent);
+    }
+    .cd-number {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(1.5rem, 5.5vw, 2.2rem);
+      color: var(--gold-light);
+      display: block;
+      line-height: 1;
+    }
+    .cd-unit {
+      font-size: 0.55rem;
+      color: var(--gold-dark);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-top: 5px;
+      display: block;
+    }
+    .cd-done {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(1.5rem, 5vw, 2rem);
+      color: var(--gold);
+      display: none;
+    }
+
+    /* ════════════════════════════════
+       FOOTER
+    ════════════════════════════════ */
+    .footer-section { text-align: center; margin-top: 8px; }
+    .footer-quote {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(1.3rem, 4.5vw, 2rem);
+      color: var(--gold);
+      opacity: 0.9;
+      line-height: 1.4;
+    }
+    .footer-hindi {
+      font-family: 'Noto Serif Devanagari', serif;
+      font-size: clamp(0.85rem, 3vw, 1.05rem);
+      color: var(--cream);
+      opacity: 0.55;
+      margin-top: 10px;
+    }
+    .footer-sub {
+      font-size: 0.7rem;
+      color: var(--gold-dark);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-top: 14px;
+    }
+
+    /* ════════════════════════════════
+       MUSIC BUTTON
+    ════════════════════════════════ */
+    #music-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 22px;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+      border: 2px solid var(--gold-light);
+      color: var(--dark-red);
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 24px rgba(212,175,55,0.45);
+      z-index: 500;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      animation: card-rise 0.5s ease 5.2s both;
+      -webkit-tap-highlight-color: transparent;
+    }
+    #music-btn:hover  { transform: scale(1.1); box-shadow: 0 6px 32px rgba(212,175,55,0.7); }
+    #music-btn:active { transform: scale(0.95); }
+    #music-btn.playing::before {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      border: 2px solid var(--gold);
+      animation: ring-out 1.5s ease-out infinite;
+    }
+    @keyframes ring-out {
+      0%   { transform: scale(1);   opacity: 0.7; }
+      100% { transform: scale(1.5); opacity: 0; }
+    }
+
+    .music-tooltip {
+      position: fixed;
+      bottom: 90px;
+      right: 16px;
+      background: rgba(45,4,8,0.92);
+      border: 1px solid var(--gold-dark);
+      color: var(--cream);
+      font-size: 0.75rem;
+      padding: 6px 12px;
+      border-radius: 4px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 501;
+    }
+    .music-tooltip.show { opacity: 1; }
+
+    /* ════════════════════════════════
+       RESPONSIVE
+    ════════════════════════════════ */
+    @media (max-width: 480px) {
+      .card-inner  { padding: 24px 16px 40px; }
+      .event-item  { min-width: 80px; padding: 10px 6px; }
+      .cd-box      { min-width: 58px; padding: 10px 10px; }
+      .music-tooltip { right: 8px; bottom: 88px; }
+    }
+    @media (min-width: 900px) {
+      .page-wrapper { padding-top: 64px; padding-bottom: 100px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════ GANESHA INTRO ═══════════════════════ -->
+<div id="intro" role="dialog" aria-label="Ganesha Blessing">
+  <div class="intro-ganesha-wrap">
+    <div class="intro-halo"></div>
+    <svg class="intro-ganesha-svg" width="170" height="200" viewBox="0 0 200 240"
+         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <!-- Outer halo rings -->
+      <circle cx="100" cy="115" r="95" fill="none" stroke="#D4AF37" stroke-width="0.8" opacity="0.25"/>
+      <circle cx="100" cy="115" r="85" fill="none" stroke="#D4AF37" stroke-width="0.5" opacity="0.15"/>
+
+      <!-- CROWN / MUKUT -->
+      <path d="M72,72 L82,55 L100,38 L118,55 L128,72" fill="none" stroke="#D4AF37" stroke-width="2.5" stroke-linejoin="round"/>
+      <line x1="100" y1="38" x2="100" y2="72" stroke="#D4AF37" stroke-width="1.5" opacity="0.6"/>
+      <line x1="82"  y1="55" x2="82"  y2="72" stroke="#D4AF37" stroke-width="1.2" opacity="0.5"/>
+      <line x1="118" y1="55" x2="118" y2="72" stroke="#D4AF37" stroke-width="1.2" opacity="0.5"/>
+      <ellipse cx="100" cy="40" rx="8" ry="9" fill="#D4AF37" opacity="0.75"/>
+      <ellipse cx="100" cy="40" rx="4" ry="4.5" fill="#F5D76E" opacity="0.9"/>
+      <circle cx="82"  cy="57" r="4" fill="#D4AF37" opacity="0.5"/>
+      <circle cx="118" cy="57" r="4" fill="#D4AF37" opacity="0.5"/>
+
+      <!-- LEFT EAR -->
+      <ellipse cx="46"  cy="112" rx="33" ry="42" fill="#D4AF37" opacity="0.1"/>
+      <ellipse cx="46"  cy="112" rx="33" ry="42" fill="none" stroke="#D4AF37" stroke-width="2"/>
+      <ellipse cx="48"  cy="112" rx="21" ry="29" fill="none" stroke="#D4AF37" stroke-width="1" opacity="0.4"/>
+
+      <!-- RIGHT EAR -->
+      <ellipse cx="154" cy="112" rx="33" ry="42" fill="#D4AF37" opacity="0.1"/>
+      <ellipse cx="154" cy="112" rx="33" ry="42" fill="none" stroke="#D4AF37" stroke-width="2"/>
+      <ellipse cx="152" cy="112" rx="21" ry="29" fill="none" stroke="#D4AF37" stroke-width="1" opacity="0.4"/>
+
+      <!-- HEAD -->
+      <ellipse cx="100" cy="118" rx="52" ry="58" fill="#D4AF37" opacity="0.1"/>
+      <ellipse cx="100" cy="118" rx="52" ry="58" fill="none" stroke="#D4AF37" stroke-width="2.5"/>
+
+      <!-- TILAK -->
+      <ellipse cx="100" cy="91" rx="7" ry="5" fill="#D4AF37" opacity="0.7"/>
+      <line x1="96" y1="91" x2="104" y2="91" stroke="#F5D76E" stroke-width="1.2"/>
+
+      <!-- LEFT EYE -->
+      <ellipse cx="83"  cy="106" rx="8" ry="7" fill="#D4AF37" opacity="0.85"/>
+      <circle  cx="83"  cy="106" r="3.5" fill="#3D0A10"/>
+      <circle  cx="81"  cy="104.5" r="1.2" fill="white" opacity="0.8"/>
+      <path d="M75,98 Q83,95 91,97" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="round"/>
+
+      <!-- RIGHT EYE -->
+      <ellipse cx="117" cy="106" rx="8" ry="7" fill="#D4AF37" opacity="0.85"/>
+      <circle  cx="117" cy="106" r="3.5" fill="#3D0A10"/>
+      <circle  cx="119" cy="104.5" r="1.2" fill="white" opacity="0.8"/>
+      <path d="M109,97 Q117,95 125,98" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="round"/>
+
+      <!-- TRUNK (curving left) -->
+      <path d="M90,128 Q72,142 76,160 Q79,172 65,178 Q58,182 62,188"
+            fill="none" stroke="#D4AF37" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M89,132 Q73,145 77,162 Q80,173 67,179"
+            fill="none" stroke="#F5D76E" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+
+      <!-- RIGHT TUSK (full) -->
+      <path d="M114,122 Q136,130 132,152 Q131,160 142,166"
+            fill="none" stroke="#F5D76E" stroke-width="4.5" stroke-linecap="round"/>
+
+      <!-- LEFT TUSK (broken stump) -->
+      <line x1="87" y1="120" x2="75" y2="133" stroke="#F5D76E" stroke-width="3.5" stroke-linecap="round"/>
+
+      <!-- NECKLACE -->
+      <path d="M62,148 Q100,162 138,148" fill="none" stroke="#D4AF37" stroke-width="1.5" stroke-dasharray="4,4" opacity="0.7"/>
+      <circle cx="100" cy="158" r="5"   fill="none" stroke="#D4AF37" stroke-width="1.5" opacity="0.7"/>
+      <circle cx="100" cy="158" r="2.5" fill="#D4AF37" opacity="0.5"/>
+
+      <!-- BODY -->
+      <ellipse cx="100" cy="200" rx="40" ry="28" fill="#D4AF37" opacity="0.08"/>
+      <ellipse cx="100" cy="200" rx="40" ry="28" fill="none" stroke="#D4AF37" stroke-width="1.5"/>
+
+      <!-- LEFT ARM -->
+      <path d="M66,152 Q46,168 50,190" fill="none" stroke="#D4AF37" stroke-width="5" stroke-linecap="round"/>
+      <circle cx="50" cy="192" r="7" fill="none" stroke="#D4AF37" stroke-width="2" opacity="0.7"/>
+
+      <!-- RIGHT ARM with modak -->
+      <path d="M134,152 Q154,168 150,190" fill="none" stroke="#D4AF37" stroke-width="5" stroke-linecap="round"/>
+      <ellipse cx="150" cy="196" rx="12" ry="13" fill="#D4AF37" opacity="0.2"/>
+      <ellipse cx="150" cy="196" rx="12" ry="13" fill="none" stroke="#D4AF37" stroke-width="2"/>
+      <line x1="150" y1="189" x2="150" y2="203" stroke="#D4AF37" stroke-width="1" opacity="0.4"/>
+      <line x1="142" y1="195" x2="158" y2="195" stroke="#D4AF37" stroke-width="1" opacity="0.4"/>
+
+      <!-- OM on chest -->
+      <text x="100" y="207" text-anchor="middle" font-size="16"
+            fill="#D4AF37" font-family="serif" opacity="0.7">&#x950;</text>
+
+      <!-- Lotus seat -->
+      <ellipse cx="100" cy="230" rx="30" ry="7" fill="#D4AF37" opacity="0.2"/>
+      <path d="M76,230 Q100,220 124,230" fill="#D4AF37" opacity="0.2"/>
+    </svg>
+  </div>
+
+  <div class="intro-om">&#x950;</div>
+  <div class="intro-blessing">&#x936;&#x94D;&#x930;&#x940; &#x917;&#x923;&#x947;&#x936;&#x93E;&#x92F; &#x928;&#x92E;&#x903;</div>
+  <div class="intro-bar">Shubh Vivah</div>
+  <div class="intro-dots">
+    <div class="intro-dot"></div>
+    <div class="intro-dot"></div>
+    <div class="intro-dot"></div>
+    <div class="intro-dot"></div>
+    <div class="intro-dot"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ MAIN PAGE ═══════════════════════ -->
+<div class="page-wrapper">
+  <div class="card">
+    <div class="card-inner">
+
+      <!-- OM + Heading -->
+      <div class="om-section">
+        <span class="om-symbol">&#x950;</span>
+        <div class="shubh-vivah">&#x2736; &nbsp; Shubh Vivah &nbsp; &#x2736;</div>
+      </div>
+
+      <div class="divider"><span class="divider-icon">&#x2767;</span></div>
+
+      <!-- Mandala -->
+      <div class="mandala-wrap">
+        <svg class="mandala-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <g transform="translate(100,100)" stroke="#D4AF37" fill="none" opacity="0.55">
+            <circle r="92" stroke-width="0.4" opacity="0.3"/>
+            <circle r="78" stroke-width="0.4" opacity="0.3"/>
+            <circle r="62" stroke-width="0.6" opacity="0.4"/>
+            <circle r="45" stroke-width="0.8" opacity="0.5"/>
+            <circle r="28" stroke-width="1"   opacity="0.6"/>
+            <circle r="12" stroke-width="1.5" opacity="0.7"/>
+            <!-- 8 outer petals -->
+            <g><ellipse cx="0" cy="-70" rx="12" ry="20" fill="#D4AF37" fill-opacity="0.12"/><ellipse cx="0" cy="-70" rx="12" ry="20"/></g>
+            <g transform="rotate(45)"><ellipse cx="0" cy="-70" rx="12" ry="20" fill="#D4AF37" fill-opacity="0.12"/><ellipse cx="0" cy="-70" rx="12" ry="20"/></g>
+            <g transform="rotate(90)"><ellipse cx="0" cy="-70" rx="12" ry="20" fill="#D4AF37" fill-opacity="0.12"/><ellipse cx="0" cy="-70" rx="12" ry="20"/></g>
+            <g transform="rotate(135)"><ellipse cx="0" cy="-70" rx="12" ry="20" fill="#D4AF37" fill-opacity="0.12"/><ellipse cx="0" cy="-70" rx="12" ry="20"/></g>
+            <g transform="rotate(180)"><ellipse cx="0" cy="-70" rx="12" ry="20" fill="#D4AF37" fill-opacity="0.12"/><ellipse cx="0" cy="-70" rx="12" ry="20"/></g>
+            <g transform="rotate(225)"><ellipse cx="0" cy="-70" rx="12" ry="20" fill="#D4AF37" fill-opacity="0.12"/><ellipse cx="0" cy="-70" rx="12" ry="20"/></g>
+            <g transform="rotate(270)"><ellipse cx="0" cy="-70" rx="12" ry="20" fill="#D4AF37" fill-opacity="0.12"/><ellipse cx="0" cy="-70" rx="12" ry="20"/></g>
+            <g transform="rotate(315)"><ellipse cx="0" cy="-70" rx="12" ry="20" fill="#D4AF37" fill-opacity="0.12"/><ellipse cx="0" cy="-70" rx="12" ry="20"/></g>
+            <!-- 8 inner petals (offset 22.5deg) -->
+            <g transform="rotate(22.5)"><ellipse cx="0" cy="-48" rx="8" ry="14" fill="#D4AF37" fill-opacity="0.1"/><ellipse cx="0" cy="-48" rx="8" ry="14" opacity="0.7"/></g>
+            <g transform="rotate(67.5)"><ellipse cx="0" cy="-48" rx="8" ry="14" fill="#D4AF37" fill-opacity="0.1"/><ellipse cx="0" cy="-48" rx="8" ry="14" opacity="0.7"/></g>
+            <g transform="rotate(112.5)"><ellipse cx="0" cy="-48" rx="8" ry="14" fill="#D4AF37" fill-opacity="0.1"/><ellipse cx="0" cy="-48" rx="8" ry="14" opacity="0.7"/></g>
+            <g transform="rotate(157.5)"><ellipse cx="0" cy="-48" rx="8" ry="14" fill="#D4AF37" fill-opacity="0.1"/><ellipse cx="0" cy="-48" rx="8" ry="14" opacity="0.7"/></g>
+            <g transform="rotate(202.5)"><ellipse cx="0" cy="-48" rx="8" ry="14" fill="#D4AF37" fill-opacity="0.1"/><ellipse cx="0" cy="-48" rx="8" ry="14" opacity="0.7"/></g>
+            <g transform="rotate(247.5)"><ellipse cx="0" cy="-48" rx="8" ry="14" fill="#D4AF37" fill-opacity="0.1"/><ellipse cx="0" cy="-48" rx="8" ry="14" opacity="0.7"/></g>
+            <g transform="rotate(292.5)"><ellipse cx="0" cy="-48" rx="8" ry="14" fill="#D4AF37" fill-opacity="0.1"/><ellipse cx="0" cy="-48" rx="8" ry="14" opacity="0.7"/></g>
+            <g transform="rotate(337.5)"><ellipse cx="0" cy="-48" rx="8" ry="14" fill="#D4AF37" fill-opacity="0.1"/><ellipse cx="0" cy="-48" rx="8" ry="14" opacity="0.7"/></g>
+            <!-- Dot ring -->
+            <circle cx="0"  cy="-33" r="2" fill="#D4AF37" opacity="0.8"/>
+            <circle cx="0"  cy="-33" r="2" fill="#D4AF37" transform="rotate(45)"  opacity="0.8"/>
+            <circle cx="0"  cy="-33" r="2" fill="#D4AF37" transform="rotate(90)"  opacity="0.8"/>
+            <circle cx="0"  cy="-33" r="2" fill="#D4AF37" transform="rotate(135)" opacity="0.8"/>
+            <circle cx="0"  cy="-33" r="2" fill="#D4AF37" transform="rotate(180)" opacity="0.8"/>
+            <circle cx="0"  cy="-33" r="2" fill="#D4AF37" transform="rotate(225)" opacity="0.8"/>
+            <circle cx="0"  cy="-33" r="2" fill="#D4AF37" transform="rotate(270)" opacity="0.8"/>
+            <circle cx="0"  cy="-33" r="2" fill="#D4AF37" transform="rotate(315)" opacity="0.8"/>
+            <!-- Center -->
+            <circle r="6" fill="#D4AF37" opacity="0.7" stroke="none"/>
+            <circle r="3" fill="#F5D76E" stroke="none"/>
+          </g>
+        </svg>
+      </div>
+
+      <!-- Couple Names -->
+      <div class="couple-section">
+        <span class="name">Yash</span>
+        <span class="and-symbol">&amp;</span>
+        <span class="name">Sakshi</span>
+      </div>
+
+      <div class="divider"><span class="divider-icon">&#x2736;</span></div>
+
+      <!-- Event Details -->
+      <div class="event-section">
+        <div class="event-label">&#x2014; &nbsp; Cordially invite you to &nbsp; &#x2014;</div>
+        <div class="event-grid">
+          <div class="event-item">
+            <div class="ei-label">Function</div>
+            <div class="ei-value">Varmala</div>
+          </div>
+          <div class="event-item">
+            <div class="ei-label">Date</div>
+            <div class="ei-value">9th July<br>2026</div>
+          </div>
+          <div class="event-item">
+            <div class="ei-label">Time</div>
+            <div class="ei-value">12:45 PM</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"><span class="divider-icon">&#x2767;</span></div>
+
+      <!-- Venue -->
+      <div class="venue-section">
+        <div class="venue-icon">&#128205;</div>
+        <div class="venue-name">Sweet Home</div>
+        <div class="venue-address">Ahilyanagar, Pune&#x2013;Nagar Road</div>
+      </div>
+
+      <div class="divider"><span class="divider-icon">&#x2736;</span></div>
+
+      <!-- Countdown -->
+      <div class="countdown-section">
+        <div class="cd-label">Counting down to the big day</div>
+        <div class="cd-grid" id="cd-grid">
+          <div class="cd-box">
+            <span class="cd-number" id="cd-days">--</span>
+            <span class="cd-unit">Days</span>
+          </div>
+          <div class="cd-box">
+            <span class="cd-number" id="cd-hours">--</span>
+            <span class="cd-unit">Hours</span>
+          </div>
+          <div class="cd-box">
+            <span class="cd-number" id="cd-mins">--</span>
+            <span class="cd-unit">Minutes</span>
+          </div>
+          <div class="cd-box">
+            <span class="cd-number" id="cd-secs">--</span>
+            <span class="cd-unit">Seconds</span>
+          </div>
+        </div>
+        <div class="cd-done" id="cd-done">The celebration has begun! &#x1F389;</div>
+      </div>
+
+      <div class="divider"><span class="divider-icon">&#x2767;</span></div>
+
+      <!-- Footer -->
+      <div class="footer-section">
+        <div class="footer-quote">Together is a beautiful place to be</div>
+        <div class="footer-hindi">&#x926;&#x94B; &#x926;&#x93F;&#x932;, &#x910;&#x915; &#x91C;&#x940;&#x935;&#x928;</div>
+        <div class="footer-sub">&#x2736; &nbsp; With love &amp; blessings &nbsp; &#x2736;</div>
+      </div>
+
+    </div><!-- /.card-inner -->
+  </div><!-- /.card -->
+</div><!-- /.page-wrapper -->
+
+<!-- ═══════════════════════ MUSIC ═══════════════════════ -->
+<div class="music-tooltip" id="music-tip">&#x1F3B5; Tap to play wedding music</div>
+<button id="music-btn" aria-label="Play wedding music" title="Play wedding music">&#x266A;</button>
+
+<div id="yt-wrap" style="position:fixed;bottom:-300px;right:-300px;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;" aria-hidden="true">
+  <div id="yt-player"></div>
+</div>
+
+<script>
+  /* ── INTRO FADE OUT ── */
+  setTimeout(function () {
+    var intro = document.getElementById('intro');
+    intro.classList.add('fade-out');
+    setTimeout(function () { intro.remove(); }, 1300);
+  }, 3300);
+
+  /* ── FALLING PETALS ── */
+  var petalColors = [
+    ['#ff9eaf','#d63a5a'],
+    ['#ffb3c1','#e05070'],
+    ['#ffd1dc','#e8799a'],
+    ['#ff8fab','#c93060'],
+    ['#ffc2d1','#e06080']
+  ];
+  for (var i = 0; i < 22; i++) {
+    (function (idx) {
+      var p = document.createElement('div');
+      p.className = 'petal';
+      var c = petalColors[idx % petalColors.length];
+      p.style.cssText = [
+        'left:'   + (Math.random() * 100)    + 'vw',
+        'width:'  + (9  + Math.random() * 8) + 'px',
+        'height:' + (14 + Math.random() * 10)+ 'px',
+        'background:radial-gradient(ellipse at 30% 30%,' + c[0] + ',' + c[1] + ')',
+        'animation-duration:' + (6 + Math.random() * 9) + 's',
+        'animation-delay:'    + (Math.random() * 12)    + 's',
+        'transform:rotate('   + (Math.random() * 360)   + 'deg)'
+      ].join(';');
+      document.body.appendChild(p);
+    }(i));
+  }
+
+  /* ── COUNTDOWN ── */
+  function pad(n) { return String(n).padStart(2, '0'); }
+  function tick() {
+    /* 9 July 2026 12:45 IST (UTC+5:30) = 07:15 UTC */
+    var target = new Date('2026-07-09T07:15:00Z').getTime();
+    var diff   = target - Date.now();
+    if (diff <= 0) {
+      document.getElementById('cd-grid').style.display = 'none';
+      document.getElementById('cd-done').style.display = 'block';
+      return;
+    }
+    document.getElementById('cd-days').textContent  = pad(Math.floor(diff / 86400000));
+    document.getElementById('cd-hours').textContent = pad(Math.floor((diff % 86400000) / 3600000));
+    document.getElementById('cd-mins').textContent  = pad(Math.floor((diff % 3600000)  / 60000));
+    document.getElementById('cd-secs').textContent  = pad(Math.floor((diff % 60000)    / 1000));
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  /* ── YOUTUBE MUSIC ── */
+  var ytPlayer  = null;
+  var isPlaying = false;
+  var ytReady   = false;
+  var btn = document.getElementById('music-btn');
+  var tip = document.getElementById('music-tip');
+
+  /* Show tooltip hint shortly after page loads */
+  setTimeout(function () {
+    tip.classList.add('show');
+    setTimeout(function () { tip.classList.remove('show'); }, 3500);
+  }, 5800);
+
+  window.onYouTubeIframeAPIReady = function () {
+    ytReady = true;
+    /* Song: Mehndi Laga Ke Rakhna — DDLJ (official audio) */
+    ytPlayer = new YT.Player('yt-player', {
+      videoId: '-bNwqXvMuB8',
+      playerVars: {
+        autoplay:       0,
+        controls:       0,
+        loop:           1,
+        playlist:       '-bNwqXvMuB8',
+        modestbranding: 1,
+        rel:            0
+      },
+      events: {
+        onStateChange: function (e) {
+          isPlaying = (e.data === YT.PlayerState.PLAYING);
+          btn.classList.toggle('playing', isPlaying);
+          btn.textContent = isPlaying ? '♬' : '♪';
+          btn.setAttribute('aria-label', isPlaying ? 'Pause music' : 'Play music');
+        }
+      }
+    });
+  };
+
+  btn.addEventListener('click', function () {
+    tip.classList.remove('show');
+    if (!ytReady || !ytPlayer || typeof ytPlayer.playVideo !== 'function') {
+      tip.textContent = '&#9203; Loading music…';
+      tip.classList.add('show');
+      setTimeout(function () { tip.classList.remove('show'); }, 2000);
+      return;
+    }
+    if (isPlaying) { ytPlayer.pauseVideo(); }
+    else           { ytPlayer.playVideo();  }
+  });
+
+  /* Load YouTube IFrame API */
+  (function () {
+    var s = document.createElement('script');
+    s.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(s);
+  }());
+</script>
+</body>
+</html>

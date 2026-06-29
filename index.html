@@ -231,53 +231,82 @@ section,footer{padding:5rem 1.2rem;position:relative;text-align:center;}
 .dir-btn:hover{background:var(--gold-l);transform:translateY(-3px);box-shadow:0 10px 28px rgba(212,175,55,.55);}
 .dir-btn svg{width:16px;height:16px;flex-shrink:0;}
 
-/* ═══ GALLERY ══════════════════════════════════ */
-#gallery-section{background:#A8203A;border-top:1px solid var(--border);}
-.gallery-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;max-width:560px;margin:2rem auto 0;}
+/* ═══ PHOTO STORY ════════════════════════════════
+   Mobile: cinematic full-height scroll
+   Desktop (≥768px): 2×2 grid
+════════════════════════════════════════════════ */
+#gallery-section{background:#A8203A;border-top:1px solid var(--border);padding-bottom:0;}
+.photo-story{margin-top:2rem;}
 
-.gallery-item{
-  position:relative;overflow:hidden;
-  border:2px solid var(--gold-d);
-  aspect-ratio:1/1;cursor:pointer;
-  transition:transform .4s cubic-bezier(.175,.885,.32,1.275),
-             box-shadow .4s ease, border-color .4s ease;
+/* ── Mobile: one photo per screen ── */
+.photo-slide{
+  position:relative;width:100%;height:88dvh;overflow:hidden;cursor:pointer;
 }
-.gallery-item:hover{
-  transform:translateY(-6px) scale(1.04);
-  border-color:var(--gold-l);
-  box-shadow:0 0 0 4px var(--gold-l),0 18px 36px rgba(0,0,0,.5),0 0 24px rgba(212,175,55,.35);
-  z-index:2;
-}
-/* Ken Burns slow zoom — different direction per photo */
-.gallery-item img{
+.photo-slide+.photo-slide{border-top:1px solid var(--border);}
+.photo-slide img{
   display:block;width:100%;height:100%;object-fit:cover;
-  animation:kb1 16s ease-in-out infinite alternate;
+  transform:scale(1.1);
+  transition:transform 1.8s cubic-bezier(.25,.46,.45,.94);
 }
-.gallery-item:nth-child(2) img{animation-name:kb2;animation-delay:-4s;}
-.gallery-item:nth-child(3) img{animation-name:kb3;animation-delay:-8s;}
-.gallery-item:nth-child(4) img{animation-name:kb4;animation-delay:-12s;}
-@keyframes kb1{from{transform:scale(1) translate(0,0);}     to{transform:scale(1.09) translate(-2%,-1.5%);}}
-@keyframes kb2{from{transform:scale(1.08) translate(2%,1%);} to{transform:scale(1)   translate(0,0);}}
-@keyframes kb3{from{transform:scale(1) translate(0,0);}     to{transform:scale(1.08) translate(2%,-1%);}}
-@keyframes kb4{from{transform:scale(1.07) translate(-1%,2%);}to{transform:scale(1)   translate(0,0);}}
+.photo-slide.ps-on img{transform:scale(1);animation:kbDrift 22s ease-in-out infinite alternate;}
+@keyframes kbDrift{from{transform:scale(1) translate(0,0);}to{transform:scale(1.07) translate(2%,-1.5%);}}
 
-/* Staggered gold border shimmer */
-@keyframes borderShimmer{
-  0%,100%{box-shadow:0 0 0 3px #A8203A,0 0 0 4px var(--gold-d);}
-  50%{box-shadow:0 0 0 3px #A8203A,0 0 0 5px var(--gold-l),0 0 16px rgba(212,175,55,.45);}
-}
-.gallery-item:nth-child(1){animation:borderShimmer 4s ease-in-out infinite 0s;}
-.gallery-item:nth-child(2){animation:borderShimmer 4s ease-in-out infinite 1s;}
-.gallery-item:nth-child(3){animation:borderShimmer 4s ease-in-out infinite 2s;}
-.gallery-item:nth-child(4){animation:borderShimmer 4s ease-in-out infinite 3s;}
-.gallery-item:hover{animation:none;}
-
-.gallery-item::after{
+.photo-slide::after{
   content:'';position:absolute;inset:0;
-  background:linear-gradient(to top,rgba(100,15,30,.42) 0%,transparent 55%);
-  pointer-events:none;transition:opacity .4s;
+  background:linear-gradient(to top,rgba(100,15,30,.70) 0%,rgba(100,15,30,.15) 45%,transparent 72%);
+  pointer-events:none;
 }
-.gallery-item:hover::after{opacity:.25;}
+.photo-slide-caption{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:2rem 1.5rem 2.5rem;text-align:center;z-index:1;
+  transform:translateY(16px);opacity:0;
+  transition:transform .9s ease .4s,opacity .9s ease .4s;
+}
+.photo-slide.ps-on .photo-slide-caption{transform:translateY(0);opacity:1;}
+.ps-num{font-family:'Cinzel Decorative',serif;font-size:.62rem;letter-spacing:.45em;color:rgba(212,175,55,.7);display:block;margin-bottom:.3rem;}
+.ps-name{font-family:'Great Vibes',cursive;font-size:clamp(2.2rem,8vw,3.5rem);color:#fff;line-height:1.15;display:block;text-shadow:0 2px 22px rgba(0,0,0,.55);}
+.ps-tap{font-family:'Cormorant Garamond',serif;font-size:.68rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:rgba(212,175,55,.6);margin-top:.4rem;display:block;}
+
+/* ── Desktop (≥768px): 2×2 grid ── */
+@media(min-width:768px){
+  #gallery-section{padding-bottom:5rem;}
+  .photo-story{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+    max-width:860px;
+    margin:2rem auto 0;
+    padding:0 1.5rem;
+  }
+  .photo-slide{height:420px;}
+  .photo-slide+.photo-slide{border-top:none;}
+  /* hover lift on desktop */
+  .photo-slide:hover{transform:translateY(-6px);z-index:2;transition:transform .35s ease;}
+  .photo-slide:hover img{transform:scale(1.06)!important;animation:none;}
+  /* gold border shimmer per card, staggered */
+  .photo-slide{
+    border:2px solid var(--gold-d);
+    box-shadow:0 0 0 3px #A8203A,0 0 0 4px var(--gold-d);
+    transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease;
+  }
+  .photo-slide:hover{
+    border-color:var(--gold-l);
+    box-shadow:0 0 0 3px #A8203A,0 0 0 5px var(--gold-l),0 20px 40px rgba(0,0,0,.5),0 0 22px rgba(212,175,55,.35);
+  }
+  @keyframes bShimmer{
+    0%,100%{box-shadow:0 0 0 3px #A8203A,0 0 0 4px var(--gold-d);}
+    50%{box-shadow:0 0 0 3px #A8203A,0 0 0 5px var(--gold-l),0 0 14px rgba(212,175,55,.4);}
+  }
+  .photo-slide:nth-child(1){animation:bShimmer 4s ease-in-out infinite 0s;}
+  .photo-slide:nth-child(2){animation:bShimmer 4s ease-in-out infinite 1s;}
+  .photo-slide:nth-child(3){animation:bShimmer 4s ease-in-out infinite 2s;}
+  .photo-slide:nth-child(4){animation:bShimmer 4s ease-in-out infinite 3s;}
+  .photo-slide:hover{animation:none;}
+  /* show caption always on desktop */
+  .photo-slide-caption{transform:translateY(0);opacity:1;transition:none;padding:1.2rem 1rem 1.5rem;}
+  .ps-name{font-size:clamp(1.6rem,3vw,2.4rem);}
+  .ps-tap{display:none;}
+}
 
 /* ═══ MUSIC VISUALIZER ══════════════════════════ */
 #music-viz{
@@ -555,18 +584,38 @@ section,footer{padding:5rem 1.2rem;position:relative;text-align:center;}
     </p>
   </div>
 
-  <div class="gallery-grid reveal reveal-d1">
-    <div class="gallery-item" onclick="openLb(0)">
-      <img src="us1.jpeg" alt="Yash &amp; Sakshi" loading="lazy"/>
+  <div class="photo-story">
+    <div class="photo-slide" onclick="openLb(0)">
+      <img src="us1.jpeg" alt="Yash &amp; Sakshi" loading="eager"/>
+      <div class="photo-slide-caption">
+        <span class="ps-num">01 &nbsp;/&nbsp; 04</span>
+        <span class="ps-name">Yash &amp; Sakshi</span>
+        <span class="ps-tap">tap to view</span>
+      </div>
     </div>
-    <div class="gallery-item" onclick="openLb(1)">
+    <div class="photo-slide" onclick="openLb(1)">
       <img src="us2.jpeg" alt="Yash &amp; Sakshi" loading="lazy"/>
+      <div class="photo-slide-caption">
+        <span class="ps-num">02 &nbsp;/&nbsp; 04</span>
+        <span class="ps-name">Yash &amp; Sakshi</span>
+        <span class="ps-tap">tap to view</span>
+      </div>
     </div>
-    <div class="gallery-item" onclick="openLb(2)">
+    <div class="photo-slide" onclick="openLb(2)">
       <img src="us3.jpeg" alt="Yash &amp; Sakshi" loading="lazy"/>
+      <div class="photo-slide-caption">
+        <span class="ps-num">03 &nbsp;/&nbsp; 04</span>
+        <span class="ps-name">Yash &amp; Sakshi</span>
+        <span class="ps-tap">tap to view</span>
+      </div>
     </div>
-    <div class="gallery-item" onclick="openLb(3)">
+    <div class="photo-slide" onclick="openLb(3)">
       <img src="us4.jpeg" alt="Yash &amp; Sakshi" loading="lazy"/>
+      <div class="photo-slide-caption">
+        <span class="ps-num">04 &nbsp;/&nbsp; 04</span>
+        <span class="ps-name">Yash &amp; Sakshi</span>
+        <span class="ps-tap">tap to view</span>
+      </div>
     </div>
   </div>
 </section>
@@ -889,6 +938,12 @@ document.addEventListener('keydown', function(e) {
     }
   }, {passive:true});
 }());
+
+/* ═══ PHOTO STORY REVEAL ═════════════════════════════════ */
+var psObs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) { e.target.classList.toggle('ps-on', e.isIntersecting); });
+}, {threshold: 0.18});
+document.querySelectorAll('.photo-slide').forEach(function(el) { psObs.observe(el); });
 
 /* ═══ SCROLL PROGRESS BAR ════════════════════════════════ */
 window.addEventListener('scroll', function() {

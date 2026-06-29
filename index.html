@@ -308,28 +308,6 @@ section,footer{padding:5rem 1.2rem;position:relative;text-align:center;}
   .ps-tap{display:none;}
 }
 
-/* ═══ MUSIC VISUALIZER ══════════════════════════ */
-#music-viz{
-  position:fixed;bottom:38px;right:84px;z-index:9400;
-  display:flex;align-items:flex-end;gap:3px;height:28px;
-  opacity:0;pointer-events:none;transition:opacity .4s;
-}
-#music-viz.show{opacity:1;}
-.viz-bar{
-  width:4px;border-radius:3px 3px 1px 1px;
-  background:linear-gradient(to top,var(--gold-d),var(--gold-l));
-  animation:vizDance .9s ease-in-out infinite;
-  transform-origin:bottom;
-}
-.viz-bar:nth-child(1){height:10px;animation-delay:0s;}
-.viz-bar:nth-child(2){height:18px;animation-delay:.14s;}
-.viz-bar:nth-child(3){height:24px;animation-delay:.07s;}
-.viz-bar:nth-child(4){height:16px;animation-delay:.21s;}
-.viz-bar:nth-child(5){height:10px;animation-delay:.11s;}
-@keyframes vizDance{0%,100%{transform:scaleY(.25);}50%{transform:scaleY(1);}}
-#music-viz.muted .viz-bar{animation-play-state:paused;transform:scaleY(.18);}
-@media(max-width:480px){#music-viz{right:70px;bottom:26px;}}
-
 /* ═══ PROGRESS BAR ═══════════════════════════════ */
 #progress-bar{
   position:fixed;top:0;left:0;height:3px;width:0%;
@@ -704,15 +682,6 @@ section,footer{padding:5rem 1.2rem;position:relative;text-align:center;}
 <!-- Scroll progress bar -->
 <div id="progress-bar" aria-hidden="true"></div>
 
-<!-- Music visualizer -->
-<div id="music-viz" aria-hidden="true">
-  <div class="viz-bar"></div>
-  <div class="viz-bar"></div>
-  <div class="viz-bar"></div>
-  <div class="viz-bar"></div>
-  <div class="viz-bar"></div>
-</div>
-
 <!-- Music toggle -->
 <button id="audio-btn" aria-label="Mute music" title="Toggle music">
   <svg id="icon-sound" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -753,9 +722,7 @@ document.getElementById('entry-play-btn').addEventListener('click', function () 
 
   setTimeout(function () {
     var btn = document.getElementById('audio-btn');
-    var viz = document.getElementById('music-viz');
     btn.classList.add('show','playing');
-    if (viz) viz.classList.add('show');
     updateMusicBtn();
   }, 900);
 
@@ -806,14 +773,10 @@ document.getElementById('audio-btn').addEventListener('click', function () {
 
 function updateMusicBtn () {
   var btn = document.getElementById('audio-btn');
-  var viz = document.getElementById('music-viz');
   document.getElementById('icon-sound').style.display = isMuted ? 'none' : '';
   document.getElementById('icon-mute').style.display  = isMuted ? '' : 'none';
   btn.classList.toggle('playing', !isMuted);
   btn.setAttribute('aria-label', isMuted ? 'Unmute music' : 'Mute music');
-  if (viz) {
-    viz.classList.toggle('muted', isMuted);
-  }
 }
 
 /* ═══ ENTRY GATE SPARKLES ═════════════════════════════════ */

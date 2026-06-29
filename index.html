@@ -9,499 +9,236 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cinzel+Decorative:wght@400;700&family=Noto+Serif+Devanagari:wght@400;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cinzel+Decorative:wght@400;700&family=Noto+Serif+Devanagari:wght@400;600&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth}
-
 :root{
-  --red:#6B0F1A;
   --dark-red:#3D0A10;
   --deeper-red:#2D0408;
   --gold:#D4AF37;
   --gold-l:#F5D76E;
   --gold-d:#A0832A;
   --cream:#FDF6E3;
-  --text-mid:rgba(253,246,227,0.75);
+  --text-mid:rgba(253,246,227,0.72);
   --border:rgba(212,175,55,0.28);
 }
+body{background:var(--deeper-red);color:var(--cream);font-family:'Cormorant Garamond',Georgia,serif;overflow-x:hidden;}
 
-body{
-  background:var(--deeper-red);
-  color:var(--cream);
-  font-family:'Cormorant Garamond',Georgia,serif;
-  overflow-x:hidden;
-}
-
-/* ═══════════════════════════════════════
-   ENTRY GATE
-═══════════════════════════════════════ */
+/* ═══ ENTRY GATE ═══════════════════════════════ */
 #entry-gate{
   position:fixed;inset:0;
-  background:radial-gradient(ellipse at 50% 40%, #5A0E18 0%, #2D0408 70%);
+  background:radial-gradient(ellipse at 50% 40%,#5A0E18 0%,#2D0408 70%);
   z-index:9999;
   display:flex;flex-direction:column;align-items:center;justify-content:space-between;
-  padding:0 20px;
-  overflow:hidden;
+  padding:0 20px;overflow:hidden;
   transition:transform 1s cubic-bezier(.77,0,.175,1);
 }
 #entry-gate.open-up{transform:translateY(-100%);}
 
-/* sparkle particles (JS creates them) */
-.sparkle{
-  position:absolute;
-  pointer-events:none;
-  border-radius:50%;
-  background:var(--gold-l);
-  animation:sparkle-drift linear infinite;
-  opacity:0;
-}
-@keyframes sparkle-drift{
-  0%  {transform:translateY(0) scale(0);opacity:0;}
-  20% {opacity:.8;}
-  80% {opacity:.4;}
-  100%{transform:translateY(-80vh) scale(1.5);opacity:0;}
-}
+.sparkle{position:absolute;pointer-events:none;border-radius:50%;background:var(--gold-l);animation:sparkle-drift linear infinite;opacity:0;}
+@keyframes sparkle-drift{0%{transform:translateY(0) scale(0);opacity:0;}20%{opacity:.8;}80%{opacity:.4;}100%{transform:translateY(-80vh) scale(1.5);opacity:0;}}
 
 /* Garland */
-.garland{
-  width:100%;max-width:700px;
-  position:relative;
-  height:56px;flex-shrink:0;
-}
-.garland-line{
-  position:absolute;top:10px;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,transparent,var(--gold-d) 20%,var(--gold) 50%,var(--gold-d) 80%,transparent);
-}
-.garland-flowers{
-  position:absolute;top:0;left:0;right:0;
-  display:flex;justify-content:space-around;align-items:flex-start;
-  padding-top:6px;
-}
-.gf{
-  font-size:1.8rem;line-height:1;display:inline-block;
-  animation:gf-sway 3s ease-in-out infinite;
-  transform-origin:top center;
-}
-.gf:nth-child(2n){animation-delay:.4s;}
-.gf:nth-child(3n){animation-delay:.8s;}
-.gf:nth-child(4n){animation-delay:1.2s;}
-@keyframes gf-sway{
-  0%,100%{transform:rotate(-7deg);}
-  50%{transform:rotate(7deg);}
-}
+.garland{width:100%;max-width:800px;position:relative;height:58px;flex-shrink:0;}
+.garland-line{position:absolute;top:12px;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold-d) 20%,var(--gold) 50%,var(--gold-d) 80%,transparent);}
+.garland-flowers{position:absolute;top:2px;left:0;right:0;display:flex;justify-content:space-around;align-items:flex-start;padding-top:4px;}
+.gf{font-size:1.8rem;line-height:1;display:inline-block;animation:gf-sway 3s ease-in-out infinite;transform-origin:top center;}
+.gf:nth-child(2n){animation-delay:.4s;}.gf:nth-child(3n){animation-delay:.8s;}.gf:nth-child(4n){animation-delay:1.2s;}
+@keyframes gf-sway{0%,100%{transform:rotate(-7deg);}50%{transform:rotate(7deg);}}
 
-/* Entry center content */
-.entry-content{
-  display:flex;flex-direction:column;align-items:center;
-  text-align:center;gap:0;
-  padding:0 20px;
-  flex:1;justify-content:center;
-  animation:entryFade 1.2s ease-out both;
-}
+.entry-content{display:flex;flex-direction:column;align-items:center;text-align:center;gap:0;padding:0 20px;flex:1;justify-content:center;animation:entryFade 1.2s ease-out both;}
 @keyframes entryFade{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
 
-.entry-ganesha{
-  width:120px;height:140px;
-  margin-bottom:12px;
-  animation:float-ganesha 4s ease-in-out infinite;
-  filter:drop-shadow(0 6px 20px rgba(212,175,55,0.5));
-}
-@keyframes float-ganesha{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-8px);}
-}
+.entry-ganesha{width:110px;height:130px;margin-bottom:10px;animation:float-g 4s ease-in-out infinite;filter:drop-shadow(0 6px 20px rgba(212,175,55,.5));}
+@keyframes float-g{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
 
-.entry-blessing{
-  font-family:'Noto Serif Devanagari',serif;
-  font-size:clamp(0.8rem,3vw,1.1rem);
-  color:var(--gold-l);letter-spacing:3px;
-  margin-bottom:10px;opacity:.85;
-}
-.entry-eyebrow{
-  font-family:'Cinzel Decorative',serif;
-  font-size:clamp(0.6rem,2vw,0.85rem);
-  letter-spacing:5px;text-transform:uppercase;
-  color:var(--gold-d);margin-bottom:8px;
-}
-.entry-names{
-  font-family:'Pinyon Script',cursive;
-  font-size:clamp(3.5rem,15vw,7rem);
-  color:#fff;line-height:1.1;
-  text-shadow:0 4px 28px rgba(0,0,0,0.5);
-  margin-bottom:4px;
-}
+.entry-blessing{font-family:'Noto Serif Devanagari',serif;font-size:clamp(.8rem,3vw,1.05rem);color:var(--gold-l);letter-spacing:3px;margin-bottom:8px;opacity:.85;}
+.entry-eyebrow{font-family:'Cinzel Decorative',serif;font-size:clamp(.6rem,2vw,.82rem);letter-spacing:5px;text-transform:uppercase;color:var(--gold-d);margin-bottom:6px;}
+.entry-names{font-family:'Pinyon Script',cursive;font-size:clamp(3.5rem,15vw,7rem);color:#fff;line-height:1.1;text-shadow:0 4px 28px rgba(0,0,0,.5);margin-bottom:4px;}
 .entry-names span{font-size:.6em;color:var(--gold-l);padding:0 .1em;}
 
-/* Pulsing play button (like reference) */
-.entry-btn-wrap{position:relative;width:fit-content;margin:20px auto 10px;}
-.entry-ring{
-  position:absolute;inset:-12px;border-radius:50%;
-  border:1.5px solid rgba(212,175,55,.6);
-  animation:ringPulse 2.6s ease-out infinite;pointer-events:none;
-}
+/* Pulsing play button */
+.entry-btn-wrap{position:relative;width:fit-content;margin:18px auto 10px;}
+.entry-ring{position:absolute;inset:-12px;border-radius:50%;border:1.5px solid rgba(212,175,55,.6);animation:ringPulse 2.6s ease-out infinite;pointer-events:none;}
 .entry-ring-delay{animation-delay:1.3s;}
-@keyframes ringPulse{
-  0%{transform:scale(.9);opacity:.9;}
-  70%{transform:scale(1.4);opacity:0;}
-  100%{transform:scale(1.4);opacity:0;}
-}
-.entry-play-btn{
-  position:relative;z-index:1;
-  width:clamp(72px,18vw,86px);height:clamp(72px,18vw,86px);
-  border-radius:50%;border:none;cursor:pointer;
-  background:linear-gradient(145deg,var(--gold-l) 0%,var(--gold) 45%,#b8942e 100%);
-  box-shadow:0 10px 32px rgba(0,0,0,.4),0 0 0 4px rgba(255,255,255,.6) inset,0 0 24px rgba(212,175,55,.4);
-  display:flex;align-items:center;justify-content:center;
-  transition:transform .35s cubic-bezier(.175,.885,.32,1.275),box-shadow .35s ease;
-}
-.entry-play-btn:hover{transform:scale(1.08);box-shadow:0 14px 40px rgba(0,0,0,.5),0 0 0 4px rgba(255,255,255,.7) inset,0 0 36px rgba(212,175,55,.6);}
+@keyframes ringPulse{0%{transform:scale(.9);opacity:.9;}70%{transform:scale(1.4);opacity:0;}100%{transform:scale(1.4);opacity:0;}}
+
+.entry-play-btn{position:relative;z-index:1;width:clamp(72px,18vw,88px);height:clamp(72px,18vw,88px);border-radius:50%;border:none;cursor:pointer;background:linear-gradient(145deg,var(--gold-l) 0%,var(--gold) 45%,#b8942e 100%);box-shadow:0 10px 32px rgba(0,0,0,.4),0 0 0 4px rgba(255,255,255,.6) inset,0 0 24px rgba(212,175,55,.4);display:flex;align-items:center;justify-content:center;transition:transform .35s cubic-bezier(.175,.885,.32,1.275),box-shadow .35s ease;}
+.entry-play-btn:hover{transform:scale(1.08);}
 .entry-play-btn:active{transform:scale(.96);}
 .entry-play-btn svg{width:32%;height:32%;margin-left:6%;color:#fff;}
 
-.entry-play-label{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(.9rem,3vw,1.1rem);
-  font-style:italic;font-weight:600;letter-spacing:.15em;
-  color:rgba(255,255,255,.9);
-  text-shadow:0 2px 14px rgba(0,0,0,.5);
-  margin-bottom:4px;
-}
-.entry-play-hint{
-  font-family:'Cormorant Garamond',serif;
-  font-size:.65rem;font-weight:600;letter-spacing:.32em;text-transform:uppercase;
-  color:rgba(255,255,255,.45);
-}
+.entry-play-label{font-family:'Cormorant Garamond',serif;font-size:clamp(.9rem,3vw,1.1rem);font-style:italic;font-weight:600;letter-spacing:.15em;color:rgba(255,255,255,.9);text-shadow:0 2px 14px rgba(0,0,0,.5);margin-bottom:3px;}
+.entry-play-hint{font-family:'Cormorant Garamond',serif;font-size:.63rem;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:rgba(255,255,255,.45);}
 
-/* ═══════════════════════════════════════
-   MAIN CONTENT
-═══════════════════════════════════════ */
-#main-content{
-  visibility:hidden;opacity:0;
-  transition:opacity .9s ease .1s,visibility 0s linear .9s;
-}
-#main-content.visible{
-  visibility:visible;opacity:1;
-  transition:opacity .9s ease .1s,visibility 0s linear 0s;
-}
+/* ═══ MAIN CONTENT ══════════════════════════════ */
+#main-content{visibility:hidden;opacity:0;transition:opacity .9s ease .1s,visibility 0s linear .9s;}
+#main-content.visible{visibility:visible;opacity:1;transition:opacity .9s ease .1s,visibility 0s linear 0s;}
 
-/* Scroll reveal */
-.reveal{opacity:0;transform:translateY(30px);transition:opacity 1.1s ease,transform 1.1s ease;}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 1.1s ease,transform 1.1s ease;}
 .reveal.revealed{opacity:1;transform:translateY(0);}
-.reveal-d1{transition-delay:.15s;}
-.reveal-d2{transition-delay:.3s;}
-.reveal-d3{transition-delay:.45s;}
+.reveal-d1{transition-delay:.15s;}.reveal-d2{transition-delay:.3s;}.reveal-d3{transition-delay:.45s;}
 
-/* Falling petals canvas */
 #petals-canvas{position:fixed;top:0;left:0;width:100%;height:100dvh;pointer-events:none;z-index:5;}
 
 /* Music button */
-#audio-btn{
-  position:fixed;bottom:26px;right:22px;z-index:9500;
-  width:52px;height:52px;border-radius:50%;
-  background:linear-gradient(135deg,var(--gold-d),var(--gold));
-  border:2px solid var(--gold-l);
-  color:var(--dark-red);
-  display:flex;align-items:center;justify-content:center;
-  cursor:pointer;
-  box-shadow:0 4px 20px rgba(212,175,55,.45);
-  transition:transform .35s cubic-bezier(.175,.885,.32,1.275);
-  opacity:0;pointer-events:none;
-}
+#audio-btn{position:fixed;bottom:26px;right:22px;z-index:9500;width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--gold-d),var(--gold));border:2px solid var(--gold-l);color:var(--dark-red);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 20px rgba(212,175,55,.45);transition:transform .3s;opacity:0;pointer-events:none;}
 #audio-btn.show{opacity:1;pointer-events:auto;}
 #audio-btn:hover{transform:scale(1.12);}
 #audio-btn svg{width:22px;height:22px;}
-#audio-btn.playing::before{
-  content:'';position:absolute;inset:-8px;border-radius:50%;
-  border:2px solid var(--gold);
-  animation:ringPulse 1.5s ease-out infinite;
-}
+#audio-btn.playing::before{content:'';position:absolute;inset:-8px;border-radius:50%;border:2px solid var(--gold);animation:ringPulse 1.5s ease-out infinite;}
 
-/* Section base */
-section,footer{padding:5rem 1.2rem;position:relative;}
+/* Section base — EVERYTHING CENTERED */
+section,footer{padding:5rem 1.2rem;position:relative;text-align:center;}
+.sec-label{font-family:'Cinzel Decorative',serif;font-size:.8rem;font-weight:700;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:.75rem;}
+.sec-heading{font-family:'Pinyon Script',cursive;font-size:clamp(3rem,9vw,5rem);line-height:1.15;color:var(--gold-l);margin-bottom:.5rem;}
 
-/* ═══════════════════════════════════════
-   HERO SECTION
-═══════════════════════════════════════ */
-#hero{
-  min-height:100dvh;
-  display:flex;align-items:center;justify-content:center;
-  background:
-    radial-gradient(ellipse at top,rgba(212,175,55,.08) 0%,transparent 60%),
-    linear-gradient(180deg,#2D0408 0%,#5A0E18 40%,#4A0B14 100%);
-  padding:3rem 1.2rem 6rem;
-}
+/* ═══ HERO ══════════════════════════════════════ */
+#hero{min-height:100dvh;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at top,rgba(212,175,55,.08) 0%,transparent 60%),linear-gradient(180deg,#2D0408 0%,#5A0E18 40%,#4A0B14 100%);padding:3rem 1.2rem 6rem;}
 
-.hero-card{
-  position:relative;width:100%;max-width:640px;
-  background:linear-gradient(155deg,#550D18 0%,#3D0A10 50%,#500C17 100%);
-  border:2px solid var(--gold-d);
-  box-shadow:0 0 0 5px #2D0408,0 0 0 7px var(--gold-d),0 0 0 12px #2D0408,0 0 0 13px rgba(212,175,55,.2),0 30px 80px rgba(0,0,0,.7);
-  padding:8px;
-  text-align:center;
-}
+.hero-card{position:relative;width:100%;max-width:640px;background:linear-gradient(155deg,#550D18 0%,#3D0A10 50%,#500C17 100%);border:2px solid var(--gold-d);box-shadow:0 0 0 5px #2D0408,0 0 0 7px var(--gold-d),0 0 0 12px #2D0408,0 0 0 13px rgba(212,175,55,.18),0 30px 80px rgba(0,0,0,.7);padding:8px;text-align:center;}
 .hero-card-inner{border:1px solid var(--border);padding:clamp(2rem,5vw,3.5rem) clamp(1.2rem,4vw,2.5rem) 3rem;}
 
 /* Gold corner frame */
-.hero-corner::before,.hero-corner::after,.hero-corner span::before,.hero-corner span::after{
-  content:'';position:absolute;width:48px;height:48px;
-  border-color:var(--gold-d);border-style:solid;opacity:.7;
-}
+.hero-corner::before,.hero-corner::after,.hero-corner span::before,.hero-corner span::after{content:'';position:absolute;width:48px;height:48px;border-color:var(--gold-d);border-style:solid;opacity:.7;}
 .hero-corner::before{top:20px;left:20px;border-width:2px 0 0 2px;}
 .hero-corner::after{top:20px;right:20px;border-width:2px 2px 0 0;}
 .hero-corner span::before{bottom:20px;left:20px;border-width:0 0 2px 2px;}
 .hero-corner span::after{bottom:20px;right:20px;border-width:0 2px 2px 0;}
 
-.hero-om{
-  font-family:'Noto Serif Devanagari',serif;
-  font-size:clamp(2.4rem,7vw,3.8rem);
-  color:var(--gold-l);line-height:1;
-  filter:drop-shadow(0 0 14px rgba(212,175,55,.7));
-  animation:glow-pulse 3s ease-in-out infinite;
-  display:block;margin-bottom:2px;
-}
-@keyframes glow-pulse{
-  0%,100%{filter:drop-shadow(0 0 10px rgba(212,175,55,.6));}
-  50%{filter:drop-shadow(0 0 30px rgba(245,215,110,1));}
-}
-
-.hero-shubh{
-  font-family:'Cinzel Decorative',serif;
-  font-size:clamp(.7rem,2vw,1rem);
-  letter-spacing:7px;text-transform:uppercase;
-  color:var(--gold);margin-bottom:16px;
-}
+.hero-om{font-family:'Noto Serif Devanagari',serif;font-size:clamp(2.4rem,7vw,3.8rem);color:var(--gold-l);line-height:1;filter:drop-shadow(0 0 14px rgba(212,175,55,.7));animation:glowPulse 3s ease-in-out infinite;display:block;margin-bottom:2px;}
+@keyframes glowPulse{0%,100%{filter:drop-shadow(0 0 10px rgba(212,175,55,.6));}50%{filter:drop-shadow(0 0 30px rgba(245,215,110,1));}}
+.hero-shubh{font-family:'Cinzel Decorative',serif;font-size:clamp(.7rem,2vw,.95rem);letter-spacing:7px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
 
 /* Spinning mandala */
 .mandala-wrap{display:flex;justify-content:center;margin:8px 0 4px;}
 .mandala-svg{width:clamp(90px,22vw,140px);height:clamp(90px,22vw,140px);animation:spin-slow 30s linear infinite;}
 @keyframes spin-slow{to{transform:rotate(360deg);}}
 
-.couple-divider{
-  display:flex;align-items:center;gap:10px;margin:12px 0;
-}
-.couple-divider::before,.couple-divider::after{
-  content:'';flex:1;height:1px;
-  background:linear-gradient(90deg,transparent,var(--gold-d),transparent);
-}
-.couple-divider-icon{color:var(--gold);font-size:1rem;}
+.divider-bar{display:flex;align-items:center;gap:10px;margin:14px 0;justify-content:center;}
+.divider-bar::before,.divider-bar::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold-d),transparent);}
+.divider-bar-icon{color:var(--gold);font-size:1rem;}
 
-/* Couple names with shimmer */
+/* Couple names — Great Vibes for clear S */
 .couple-name{
-  font-family:'Pinyon Script',cursive;
-  font-size:clamp(3.8rem,14vw,6rem);
-  line-height:1.15;display:block;
-  overflow:visible;white-space:nowrap;padding:.1em 0;
+  font-family:'Great Vibes',cursive;
+  font-size:clamp(4rem,14vw,6.5rem);
+  line-height:1.2;display:block;overflow:visible;white-space:nowrap;padding:.1em 0;
   background:linear-gradient(105deg,#A0832A 15%,#D4AF37 30%,#F5D76E 45%,#FDF6E3 55%,#D4AF37 70%,#A0832A 85%);
   background-size:200% auto;
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  background-clip:text;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
   animation:shimmer 4s linear infinite;
 }
 @keyframes shimmer{to{background-position:200% center;}}
-
-.amp-row{display:flex;align-items:center;justify-content:center;gap:1rem;margin:.5rem 0;}
+.amp-row{display:flex;align-items:center;justify-content:center;gap:1rem;margin:.4rem 0;}
 .amp-line{height:1px;width:40px;background:var(--border);}
 .amp-sym{font-family:'Pinyon Script',cursive;font-size:2.4rem;color:var(--gold);line-height:1;}
+.hero-invite{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(.95rem,2.8vw,1.15rem);color:var(--text-mid);line-height:1.7;margin:16px 0 8px;text-align:center;}
 
-.hero-invite{
-  font-family:'Cormorant Garamond',serif;font-style:italic;
-  font-size:clamp(.95rem,2.8vw,1.2rem);
-  color:var(--text-mid);line-height:1.7;margin:16px 0 8px;
-}
-
-/* Scroll indicator */
-.scroll-indicator{
-  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
-  display:flex;flex-direction:column;align-items:center;gap:6px;
-  opacity:0;animation:fadeIn 1.5s forwards 1.5s;cursor:pointer;
-}
-.scroll-indicator span{
-  font-family:'Cormorant Garamond',serif;font-size:.78rem;font-weight:600;
-  letter-spacing:.28em;text-transform:uppercase;color:var(--gold-d);
-}
+.scroll-indicator{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;opacity:0;animation:fadeIn 1.5s forwards 1.5s;cursor:pointer;}
+.scroll-indicator span{font-family:'Cormorant Garamond',serif;font-size:.78rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-d);}
 .scroll-indicator svg{width:20px;height:20px;color:var(--gold-d);animation:bounce 2s infinite;}
 @keyframes bounce{0%,20%,50%,80%,100%{transform:translateY(0);}40%{transform:translateY(-7px);}60%{transform:translateY(-3px);}}
 @keyframes fadeIn{to{opacity:1;}}
 
-/* ═══════════════════════════════════════
-   COUNTDOWN SECTION
-═══════════════════════════════════════ */
-#countdown-section{
-  background:linear-gradient(180deg,#4A0B14 0%,#2D0408 100%);
-  border-top:1px solid var(--border);
+/* ═══ VARMALA PHOTO ════════════════════════════ */
+#varmala-section{background:linear-gradient(180deg,#4A0B14 0%,#2D0408 100%);border-top:1px solid var(--border);}
+.varmala-frame-wrap{max-width:560px;margin:2rem auto 0;}
+.varmala-frame{
+  position:relative;
+  background:linear-gradient(135deg,#550D18,#3D0A10 50%,#550D18);
+  border:2px solid var(--gold-d);
+  box-shadow:0 0 0 4px #2D0408,0 0 0 6px var(--gold-d);
+  padding:8px;overflow:hidden;
 }
-.cd-card{
-  max-width:480px;margin:0 auto;
-  background:rgba(0,0,0,.25);
-  border:1px solid var(--border);border-radius:4px;
-  padding:clamp(2rem,5vw,3rem) 1.5rem;text-align:center;
+.varmala-frame-inner{
+  border:1px solid var(--border);
+  padding:3rem 2rem;
+  display:flex;flex-direction:column;align-items:center;gap:1rem;
+  position:relative;overflow:hidden;
+  min-height:260px;justify-content:center;
 }
+/* Animated background shimmer */
+.varmala-frame-inner::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 30%,rgba(212,175,55,.08) 0%,transparent 70%);
+  animation:bgShimmer 4s ease-in-out infinite;
+}
+@keyframes bgShimmer{0%,100%{opacity:.5;}50%{opacity:1;}}
+
+.vf-corner{position:absolute;font-size:1.2rem;color:var(--gold-d);}
+.vf-corner.tl{top:12px;left:12px;}.vf-corner.tr{top:12px;right:12px;}
+.vf-corner.bl{bottom:12px;left:12px;}.vf-corner.br{bottom:12px;right:12px;}
+
+.vf-flowers{font-size:1.6rem;letter-spacing:6px;position:relative;z-index:1;}
+.vf-names{font-family:'Great Vibes',cursive;font-size:clamp(2.8rem,10vw,4rem);color:var(--gold-l);line-height:1.2;position:relative;z-index:1;text-shadow:0 2px 16px rgba(212,175,55,.4);}
+.vf-title{font-family:'Cinzel Decorative',serif;font-size:clamp(.75rem,2.5vw,1rem);letter-spacing:5px;text-transform:uppercase;color:var(--gold);position:relative;z-index:1;}
+.vf-desc{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(.95rem,3vw,1.1rem);color:var(--text-mid);line-height:1.65;position:relative;z-index:1;}
+.vf-rule{width:60%;height:1px;background:linear-gradient(90deg,transparent,var(--gold-d),transparent);position:relative;z-index:1;}
+
+/* ═══ COUNTDOWN ════════════════════════════════ */
+#countdown-section{background:linear-gradient(180deg,#2D0408 0%,#4A0B14 100%);border-top:1px solid var(--border);}
+.cd-card{max-width:480px;margin:0 auto;background:rgba(0,0,0,.25);border:1px solid var(--border);padding:clamp(2rem,5vw,3rem) 1.5rem;text-align:center;}
 .cd-quote{font-style:italic;font-size:clamp(1rem,3vw,1.2rem);color:var(--text-mid);line-height:1.65;margin-bottom:.5rem;}
 .cd-script{font-family:'Pinyon Script',cursive;font-size:clamp(2.2rem,7vw,3.2rem);color:var(--gold);display:block;line-height:1.2;margin-bottom:.25rem;}
-.cd-date{font-family:'Cinzel Decorative',serif;font-size:.85rem;letter-spacing:.22em;color:var(--gold-d);text-transform:uppercase;margin:1rem 0 2rem;display:block;}
+.cd-date-lbl{font-family:'Cinzel Decorative',serif;font-size:.82rem;letter-spacing:.22em;color:var(--gold-d);text-transform:uppercase;margin:1rem 0 2rem;display:block;}
 .cd-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;}
 .cd-unit{display:flex;flex-direction:column;align-items:center;gap:.4rem;}
-.cd-num{
-  font-family:'Cinzel Decorative',serif;font-size:clamp(1.8rem,7vw,2.8rem);
-  color:var(--gold-l);line-height:1;position:relative;
-}
+.cd-num{font-family:'Cinzel Decorative',serif;font-size:clamp(1.8rem,7vw,2.8rem);color:var(--gold-l);line-height:1;position:relative;}
 .cd-num::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-d),transparent);}
-.cd-lbl{font-family:'Cormorant Garamond',serif;font-size:.78rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-d);}
+.cd-lbl{font-family:'Cormorant Garamond',serif;font-size:.75rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-d);}
 .cd-done{font-family:'Pinyon Script',cursive;font-size:clamp(1.5rem,5vw,2rem);color:var(--gold);display:none;}
 
-/* ═══════════════════════════════════════
-   EVENT SECTION
-═══════════════════════════════════════ */
-#event-section{
-  background:linear-gradient(180deg,#2D0408 0%,#5A0E18 50%,#2D0408 100%);
-  border-top:1px solid var(--border);
-}
-.sec-label{
-  font-family:'Cinzel Decorative',serif;font-size:.8rem;font-weight:700;
-  letter-spacing:.4em;text-transform:uppercase;color:var(--gold);
-  display:block;margin-bottom:.75rem;text-align:center;
-}
-.sec-heading{
-  font-family:'Pinyon Script',cursive;font-size:clamp(3rem,9vw,5rem);
-  line-height:1.15;color:var(--gold-l);margin-bottom:.5rem;text-align:center;
-}
-
-.evt-block{max-width:480px;margin:2.5rem auto 0;}
-.evt-card{
-  background:rgba(0,0,0,.25);border:1px solid var(--border);
-  padding:2rem 1.5rem;text-align:center;
-}
-.evt-name{font-family:'Pinyon Script',cursive;font-size:clamp(2.2rem,7vw,3.2rem);color:var(--gold-l);line-height:1.2;}
-.evt-desc{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1rem,3vw,1.15rem);color:var(--text-mid);line-height:1.55;margin:.5rem 0;}
-
+/* ═══ EVENT ════════════════════════════════════ */
+#event-section{background:linear-gradient(180deg,#4A0B14 0%,#2D0408 100%);border-top:1px solid var(--border);}
+.evt-card{max-width:480px;margin:2rem auto 0;background:rgba(0,0,0,.25);border:1px solid var(--border);padding:2rem 1.5rem;text-align:center;}
+.evt-name{font-family:'Pinyon Script',cursive;font-size:clamp(2.2rem,7vw,3.2rem);color:var(--gold-l);line-height:1.2;display:block;}
+.evt-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1rem,3vw,1.15rem);color:var(--text-mid);line-height:1.55;margin:.5rem 0;}
 .evt-grid{display:flex;justify-content:center;flex-wrap:wrap;margin-top:1.5rem;gap:0;}
-.evt-item{flex:1;min-width:100px;padding:1rem .75rem;border-right:1px solid var(--border);}
+.evt-item{flex:1;min-width:100px;padding:1rem .75rem;border-right:1px solid var(--border);text-align:center;}
 .evt-item:last-child{border-right:none;}
-.ei-label{font-size:.6rem;color:var(--gold-d);letter-spacing:3px;text-transform:uppercase;font-family:'Cormorant Garamond',serif;}
-.ei-value{font-family:'Cinzel Decorative',serif;font-size:clamp(.75rem,2.5vw,.95rem);color:var(--cream);margin-top:5px;line-height:1.35;}
+.ei-label{font-size:.6rem;color:var(--gold-d);letter-spacing:3px;text-transform:uppercase;}
+.ei-value{font-family:'Cinzel Decorative',serif;font-size:clamp(.72rem,2.5vw,.92rem);color:var(--cream);margin-top:5px;line-height:1.35;}
 
-/* ═══════════════════════════════════════
-   VENUE SECTION
-═══════════════════════════════════════ */
-#venue-section{
-  background:linear-gradient(180deg,#2D0408 0%,#4A0B14 100%);
-  border-top:1px solid var(--border);
-}
-.venue-card{
-  max-width:480px;margin:2rem auto 0;
-  background:rgba(0,0,0,.22);
-  border:1px solid var(--border);
-  padding:2.5rem 1.5rem;text-align:center;
-}
-.venue-icon{font-size:2rem;margin-bottom:.75rem;display:block;}
-.venue-name{
-  font-family:'Pinyon Script',cursive;font-size:clamp(2.4rem,8vw,3.5rem);
-  color:var(--gold-l);line-height:1.1;margin-bottom:.5rem;
-}
-.venue-address{
-  font-family:'Cormorant Garamond',serif;font-style:italic;
-  font-size:clamp(.95rem,3vw,1.1rem);color:var(--text-mid);line-height:1.6;margin-bottom:2rem;
-}
-
-/* Direction button */
-.dir-btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:10px;
-  background:var(--gold);color:var(--dark-red);text-decoration:none;
-  padding:.85rem 2.2rem;border-radius:50px;
-  font-family:'Cinzel Decorative',serif;font-size:.75rem;
-  font-weight:700;letter-spacing:.22em;text-transform:uppercase;
-  transition:all .3s ease;
-  box-shadow:0 6px 20px rgba(212,175,55,.35);
-  border:2px solid var(--gold-l);
-}
+/* ═══ VENUE ════════════════════════════════════ */
+#venue-section{background:linear-gradient(180deg,#2D0408 0%,#4A0B14 100%);border-top:1px solid var(--border);}
+.venue-card{max-width:540px;margin:2rem auto 0;text-align:center;}
+.venue-map{width:100%;border-radius:8px;overflow:hidden;border:1px solid var(--border);margin-bottom:1.5rem;box-shadow:0 8px 32px rgba(0,0,0,.5);}
+.venue-map iframe{display:block;width:100%;height:220px;border:0;}
+.venue-name-big{font-family:'Pinyon Script',cursive;font-size:clamp(2.4rem,8vw,3.5rem);color:var(--gold-l);line-height:1.1;margin-bottom:.4rem;}
+.venue-address{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(.95rem,3vw,1.1rem);color:var(--text-mid);line-height:1.6;margin-bottom:1.5rem;}
+.dir-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--gold);color:var(--dark-red);text-decoration:none;padding:.85rem 2.2rem;border-radius:50px;font-family:'Cinzel Decorative',serif;font-size:.72rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;transition:all .3s;box-shadow:0 6px 20px rgba(212,175,55,.35);border:2px solid var(--gold-l);}
 .dir-btn:hover{background:var(--gold-l);transform:translateY(-3px);box-shadow:0 10px 28px rgba(212,175,55,.55);}
 .dir-btn svg{width:16px;height:16px;flex-shrink:0;}
 
-/* ═══════════════════════════════════════
-   SIGNATURE SECTION
-═══════════════════════════════════════ */
-#signatures-section{
-  background:linear-gradient(180deg,#4A0B14 0%,#2D0408 100%);
-  border-top:1px solid var(--border);
-}
-.signatures-wrap{
-  display:flex;align-items:center;justify-content:center;
-  gap:1.5rem;flex-wrap:wrap;max-width:560px;margin:2rem auto 0;
-}
+/* ═══ SIGNATURES ═══════════════════════════════ */
+#signatures-section{background:linear-gradient(180deg,#4A0B14 0%,#2D0408 100%);border-top:1px solid var(--border);}
+.signatures-wrap{display:flex;align-items:center;justify-content:center;gap:1.5rem;flex-wrap:wrap;max-width:560px;margin:2rem auto 0;}
 .sig{text-align:center;flex:1;min-width:140px;}
-.sig-name{
-  font-family:'Pinyon Script',cursive;
-  font-size:clamp(3rem,10vw,4.5rem);
-  color:var(--gold-l);line-height:1.2;display:block;
-  text-shadow:0 2px 16px rgba(212,175,55,.4);
-  animation:glow-pulse 4s ease-in-out infinite;
-}
-.sig-rule{
-  width:80%;height:2px;margin:.2rem auto .6rem;
-  background:linear-gradient(90deg,transparent,var(--gold),transparent);
-  position:relative;
-}
-.sig-rule::before,.sig-rule::after{
-  content:'';position:absolute;top:-2px;
-  width:6px;height:6px;background:var(--gold);border-radius:50%;
-}
-.sig-rule::before{left:20%;}
-.sig-rule::after{right:20%;}
-.sig-role{
-  font-family:'Cinzel Decorative',serif;font-size:.65rem;
-  letter-spacing:4px;text-transform:uppercase;color:var(--gold-d);
-}
-.sig-heart{
-  font-family:'Pinyon Script',cursive;
-  font-size:clamp(2rem,7vw,3rem);
-  color:var(--gold);line-height:1;
-  animation:glow-pulse 2.5s ease-in-out infinite;
-  flex-shrink:0;
-}
+/* Great Vibes for clear S in Sakshi */
+.sig-name{font-family:'Great Vibes',cursive;font-size:clamp(3rem,10vw,4.5rem);color:var(--gold-l);line-height:1.25;display:block;text-shadow:0 2px 16px rgba(212,175,55,.4);animation:glowPulse 4s ease-in-out infinite;}
+.sig-rule{width:75%;height:2px;margin:.2rem auto .6rem;background:linear-gradient(90deg,transparent,var(--gold),transparent);position:relative;}
+.sig-rule::before,.sig-rule::after{content:'';position:absolute;top:-2px;width:6px;height:6px;background:var(--gold);border-radius:50%;}
+.sig-rule::before{left:20%;}.sig-rule::after{right:20%;}
+.sig-role{font-family:'Cinzel Decorative',serif;font-size:.62rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold-d);}
+.sig-heart{font-family:'Pinyon Script',cursive;font-size:clamp(2rem,7vw,3rem);color:var(--gold);line-height:1;animation:glowPulse 2.5s ease-in-out infinite;flex-shrink:0;}
 
-/* ═══════════════════════════════════════
-   WARM REGARDS / FOOTER
-═══════════════════════════════════════ */
-#footer-section{
-  background:linear-gradient(180deg,#2D0408 0%,#1A0306 100%);
-  border-top:1px solid var(--border);
-  text-align:center;padding-bottom:5rem;
-}
-.footer-flower-bar{
-  display:flex;justify-content:center;align-items:center;
-  gap:8px;margin-bottom:2.5rem;
-}
+/* ═══ FOOTER / WARM REGARDS ════════════════════ */
+#footer-section{background:linear-gradient(180deg,#2D0408 0%,#1A0306 100%);border-top:1px solid var(--border);padding-bottom:6rem;}
+.footer-flower-bar{display:flex;justify-content:center;align-items:center;gap:8px;margin-bottom:2.5rem;}
 .footer-flower-bar span{font-size:1.4rem;}
-.footer-flower-bar::before,.footer-flower-bar::after{
-  content:'';flex:1;max-width:120px;height:1px;
-  background:linear-gradient(90deg,transparent,var(--gold-d));
-}
+.footer-flower-bar::before,.footer-flower-bar::after{content:'';flex:1;max-width:120px;height:1px;background:linear-gradient(90deg,transparent,var(--gold-d));}
 .footer-flower-bar::after{background:linear-gradient(90deg,var(--gold-d),transparent);}
 
-.wr-label{
-  font-family:'Cormorant Garamond',serif;font-style:italic;
-  font-size:clamp(1rem,3vw,1.25rem);color:var(--text-mid);
-  line-height:1.75;max-width:520px;margin:0 auto 1.5rem;
-}
-.wr-names{
-  font-family:'Pinyon Script',cursive;
-  font-size:clamp(3.5rem,11vw,5.5rem);
-  color:var(--gold);display:block;line-height:1.1;margin:.5rem 0;
-}
-.wr-hindi{
-  font-family:'Noto Serif Devanagari',serif;
-  font-size:clamp(.9rem,3vw,1.1rem);color:var(--cream);opacity:.5;margin-top:.75rem;
-}
-.wr-sub{
-  font-family:'Cinzel Decorative',serif;font-size:.65rem;
-  letter-spacing:4px;text-transform:uppercase;color:var(--gold-d);
-  margin-top:2rem;
-}
+.wr-label{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1rem,3vw,1.2rem);color:var(--text-mid);line-height:1.75;max-width:500px;margin:0 auto 1.5rem;}
+.wr-regards{font-family:'Cormorant Garamond',serif;font-size:clamp(.85rem,2.5vw,1rem);font-weight:600;letter-spacing:.18em;color:var(--text-mid);margin-bottom:.4rem;}
+.wr-family{font-family:'Cormorant Garamond',serif;font-size:clamp(1.1rem,3.5vw,1.4rem);color:var(--gold-d);font-style:italic;margin-bottom:2rem;}
+.wr-names{font-family:'Great Vibes',cursive;font-size:clamp(3.5rem,11vw,5.5rem);color:var(--gold);display:block;line-height:1.15;margin:.5rem 0;}
+.wr-hindi{font-family:'Noto Serif Devanagari',serif;font-size:clamp(.9rem,3vw,1.1rem);color:var(--cream);opacity:.5;margin-top:.75rem;}
+.wr-sub{font-family:'Cinzel Decorative',serif;font-size:.63rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold-d);margin-top:2rem;}
 
-/* ═══════════════════════════════════════
-   RESPONSIVE
-═══════════════════════════════════════ */
+/* ═══ RESPONSIVE ═══════════════════════════════ */
 @media(max-width:480px){
   .hero-card-inner{padding:1.5rem 1rem 2.5rem;}
   .evt-item{min-width:85px;padding:.75rem .5rem;}
@@ -509,33 +246,26 @@ section,footer{padding:5rem 1.2rem;position:relative;}
   .sig-name{font-size:clamp(2.5rem,9vw,3.5rem);}
   #audio-btn{bottom:18px;right:14px;width:46px;height:46px;}
 }
-@media(min-width:900px){
-  section,footer{padding:6rem 2rem;}
-  #hero{padding:4rem 2rem 7rem;}
-}
+@media(min-width:900px){section,footer{padding:6rem 2rem;}#hero{padding:4rem 2rem 7rem;}}
 </style>
 </head>
 <body>
 
-<!-- ══════════════════════════════════
-     ENTRY GATE
-══════════════════════════════════ -->
+<!-- ═══ ENTRY GATE ═══════════════════════════════════════ -->
 <div id="entry-gate">
   <!-- Top garland -->
-  <div class="garland" style="padding-top:env(safe-area-inset-top,0)">
+  <div class="garland">
     <div class="garland-line"></div>
     <div class="garland-flowers">
-      <span class="gf">🌸</span><span class="gf">🌼</span><span class="gf">🌺</span>
-      <span class="gf">🌸</span><span class="gf">🌼</span><span class="gf">🌺</span>
-      <span class="gf">🌸</span><span class="gf">🌼</span><span class="gf">🌺</span>
-      <span class="gf">🌸</span><span class="gf">🌼</span><span class="gf">🌺</span>
+      <span class="gf">🌸</span><span class="gf">🌼</span><span class="gf">🌺</span><span class="gf">🌸</span>
+      <span class="gf">🌼</span><span class="gf">🌺</span><span class="gf">🌸</span><span class="gf">🌼</span>
+      <span class="gf">🌺</span><span class="gf">🌸</span><span class="gf">🌼</span><span class="gf">🌺</span>
     </div>
   </div>
 
-  <!-- Center content -->
   <div class="entry-content">
     <!-- Ganesha SVG -->
-    <svg class="entry-ganesha" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg" aria-label="Ganesha">
+    <svg class="entry-ganesha" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg" aria-label="Ganesha blessing">
       <circle cx="100" cy="115" r="88" fill="none" stroke="#D4AF37" stroke-width="0.8" opacity="0.2"/>
       <path d="M72,72 L82,55 L100,38 L118,55 L128,72" fill="none" stroke="#D4AF37" stroke-width="2.5" stroke-linejoin="round"/>
       <line x1="100" y1="38" x2="100" y2="72" stroke="#D4AF37" stroke-width="1.5" opacity="0.6"/>
@@ -562,7 +292,7 @@ section,footer{padding:5rem 1.2rem;position:relative;}
       <circle cx="117" cy="106" r="3.5" fill="#3D0A10"/>
       <circle cx="119" cy="104.5" r="1.2" fill="white" opacity="0.8"/>
       <path d="M109,97 Q117,95 125,98" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="round"/>
-      <path d="M90,128 Q72,142 76,160 Q79,172 65,178 Q58,182 62,188" fill="none" stroke="#D4AF37" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M90,128 Q72,142 76,160 Q79,172 65,178 Q58,182 62,188" fill="none" stroke="#D4AF37" stroke-width="8" stroke-linecap="round"/>
       <path d="M114,122 Q136,130 132,152 Q131,160 142,166" fill="none" stroke="#F5D76E" stroke-width="4.5" stroke-linecap="round"/>
       <line x1="87" y1="120" x2="75" y2="133" stroke="#F5D76E" stroke-width="3.5" stroke-linecap="round"/>
       <path d="M62,148 Q100,162 138,148" fill="none" stroke="#D4AF37" stroke-width="1.5" stroke-dasharray="4,4" opacity="0.6"/>
@@ -575,39 +305,32 @@ section,footer{padding:5rem 1.2rem;position:relative;}
 
     <div class="entry-blessing">&#x936;&#x94D;&#x930;&#x940; &#x917;&#x923;&#x947;&#x936;&#x93E;&#x92F; &#x928;&#x92E;&#x903;</div>
     <div class="entry-eyebrow">You're Invited</div>
-
     <div class="entry-names">Y <span>&amp;</span> S</div>
 
     <div class="entry-btn-wrap">
       <span class="entry-ring" aria-hidden="true"></span>
       <span class="entry-ring entry-ring-delay" aria-hidden="true"></span>
       <button type="button" id="entry-play-btn" class="entry-play-btn" aria-label="Open invitation">
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-          <path d="M8 5v14l11-7z"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
       </button>
     </div>
     <p class="entry-play-label">Tap to open</p>
     <p class="entry-play-hint">your invitation</p>
   </div>
 
-  <!-- Bottom garland -->
-  <div class="garland" style="transform:scaleY(-1);padding-bottom:env(safe-area-inset-bottom,0)">
+  <!-- Bottom garland (flipped) -->
+  <div class="garland" style="transform:scaleY(-1)">
     <div class="garland-line"></div>
     <div class="garland-flowers">
-      <span class="gf">🌺</span><span class="gf">🌼</span><span class="gf">🌸</span>
-      <span class="gf">🌺</span><span class="gf">🌼</span><span class="gf">🌸</span>
-      <span class="gf">🌺</span><span class="gf">🌼</span><span class="gf">🌸</span>
-      <span class="gf">🌺</span><span class="gf">🌼</span><span class="gf">🌸</span>
+      <span class="gf">🌺</span><span class="gf">🌼</span><span class="gf">🌸</span><span class="gf">🌺</span>
+      <span class="gf">🌼</span><span class="gf">🌸</span><span class="gf">🌺</span><span class="gf">🌼</span>
+      <span class="gf">🌸</span><span class="gf">🌺</span><span class="gf">🌼</span><span class="gf">🌸</span>
     </div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════
-     MAIN CONTENT
-══════════════════════════════════ -->
+<!-- ═══ MAIN CONTENT ══════════════════════════════════════ -->
 <div id="main-content" aria-hidden="true">
-
 <canvas id="petals-canvas" aria-hidden="true"></canvas>
 
 <!-- HERO -->
@@ -615,11 +338,9 @@ section,footer{padding:5rem 1.2rem;position:relative;}
   <div class="hero-card">
     <div class="hero-corner"><span></span></div>
     <div class="hero-card-inner">
-
       <span class="hero-om">&#x950;</span>
       <div class="hero-shubh">&#x2736; &nbsp; Shubh Vivah &nbsp; &#x2736;</div>
 
-      <!-- Mandala -->
       <div class="mandala-wrap">
         <svg class="mandala-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <g transform="translate(100,100)" stroke="#D4AF37" fill="none" opacity="0.5">
@@ -656,8 +377,7 @@ section,footer{padding:5rem 1.2rem;position:relative;}
         </svg>
       </div>
 
-      <!-- Couple names -->
-      <div class="couple-divider"><span class="couple-divider-icon">&#x2736;</span></div>
+      <div class="divider-bar"><span class="divider-bar-icon">&#x2736;</span></div>
       <span class="couple-name">Yash</span>
       <div class="amp-row">
         <div class="amp-line"></div>
@@ -665,16 +385,16 @@ section,footer{padding:5rem 1.2rem;position:relative;}
         <div class="amp-line"></div>
       </div>
       <span class="couple-name">Sakshi</span>
-      <div class="couple-divider"><span class="couple-divider-icon">&#x2736;</span></div>
+      <div class="divider-bar"><span class="divider-bar-icon">&#x2736;</span></div>
 
       <p class="hero-invite">
-        Together they begin a journey of love,<br>
-        and together we celebrate this new beginning.
+        Together they begin a journey of love,<br/>
+        and together we celebrate this beautiful beginning.
       </p>
     </div>
   </div>
 
-  <div class="scroll-indicator" onclick="document.getElementById('countdown-section').scrollIntoView({behavior:'smooth'})">
+  <div class="scroll-indicator" onclick="document.getElementById('varmala-section').scrollIntoView({behavior:'smooth'})">
     <span>Scroll to explore</span>
     <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
       <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
@@ -682,13 +402,71 @@ section,footer{padding:5rem 1.2rem;position:relative;}
   </div>
 </section>
 
+<!-- VARMALA CEREMONY PHOTO -->
+<section id="varmala-section">
+  <div class="reveal">
+    <span class="sec-label">The Sacred Moment</span>
+    <h2 class="sec-heading">Varmala</h2>
+    <p style="font-style:italic;color:var(--text-mid);font-size:clamp(.95rem,3vw,1.1rem);margin-top:.2rem">
+      Two hearts, two garlands, one beautiful beginning
+    </p>
+  </div>
+
+  <div class="varmala-frame-wrap reveal reveal-d1">
+    <div class="varmala-frame">
+      <div class="varmala-frame-inner">
+        <span class="vf-corner tl">&#x2736;</span>
+        <span class="vf-corner tr">&#x2736;</span>
+        <span class="vf-corner bl">&#x2736;</span>
+        <span class="vf-corner br">&#x2736;</span>
+
+        <div class="vf-flowers">&#x1F338; &#x1F33C; &#x1F33A;</div>
+
+        <!-- Decorative Varmala illustration -->
+        <svg width="180" height="100" viewBox="0 0 280 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Left figure (groom) -->
+          <circle cx="72" cy="28" r="20" fill="none" stroke="#D4AF37" stroke-width="2"/>
+          <path d="M52,48 Q72,80 92,48" fill="none" stroke="#D4AF37" stroke-width="2"/>
+          <!-- Right figure (bride) -->
+          <circle cx="208" cy="28" r="20" fill="none" stroke="#D4AF37" stroke-width="2"/>
+          <path d="M188,48 Q208,80 228,48" fill="none" stroke="#D4AF37" stroke-width="2"/>
+          <!-- Garland / Haar left to right -->
+          <path d="M86,36 Q140,10 194,36" fill="none" stroke="#D4AF37" stroke-width="3" stroke-linecap="round"/>
+          <!-- Flowers on garland -->
+          <circle cx="110" cy="22" r="6" fill="#D4AF37" opacity="0.7"/>
+          <circle cx="140" cy="14" r="7" fill="#F5D76E" opacity="0.8"/>
+          <circle cx="170" cy="22" r="6" fill="#D4AF37" opacity="0.7"/>
+          <!-- Small petals around center flower -->
+          <circle cx="140" cy="7"  r="3" fill="#FF8C00" opacity="0.7"/>
+          <circle cx="147" cy="14" r="3" fill="#FF8C00" opacity="0.7"/>
+          <circle cx="133" cy="14" r="3" fill="#FF8C00" opacity="0.7"/>
+          <circle cx="140" cy="21" r="3" fill="#FF8C00" opacity="0.7"/>
+          <!-- Second garland going other way -->
+          <path d="M90,44 Q140,72 190,44" fill="none" stroke="#D4AF37" stroke-width="2" stroke-dasharray="6,4"/>
+          <!-- Heart in center -->
+          <text x="140" y="90" text-anchor="middle" font-size="22" fill="#D4AF37" opacity="0.8">&#x2665;</text>
+          <!-- Names -->
+          <text x="72"  y="108" text-anchor="middle" font-size="11" fill="#F5D76E" font-family="serif" opacity="0.9">Yash</text>
+          <text x="208" y="108" text-anchor="middle" font-size="11" fill="#F5D76E" font-family="serif" opacity="0.9">Sakshi</text>
+        </svg>
+
+        <div class="vf-rule"></div>
+        <div class="vf-names">Yash &amp; Sakshi</div>
+        <div class="vf-title">Varmala Ceremony</div>
+        <div class="vf-desc">9th July 2026 &nbsp;&#xB7;&nbsp; 12:45 PM</div>
+        <div class="vf-flowers">&#x1F33A; &#x1F33C; &#x1F338;</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- COUNTDOWN -->
 <section id="countdown-section">
   <div class="cd-card reveal">
     <p class="cd-quote">A lifetime of togetherness begins with one sacred step</p>
-    <span class="cd-script">The Wedding</span>
-    <span class="cd-date reveal reveal-d1">09 &nbsp;&#xB7;&nbsp; 07 &nbsp;&#xB7;&nbsp; 2026</span>
-    <div class="cd-grid reveal reveal-d2">
+    <span class="cd-script">The Wedding Day</span>
+    <span class="cd-date-lbl reveal reveal-d1">09 &nbsp;&#xB7;&nbsp; 07 &nbsp;&#xB7;&nbsp; 2026</span>
+    <div class="cd-grid reveal reveal-d2" id="cd-grid">
       <div class="cd-unit"><span class="cd-num" id="cd-days">--</span><span class="cd-lbl">Days</span></div>
       <div class="cd-unit"><span class="cd-num" id="cd-hours">--</span><span class="cd-lbl">Hours</span></div>
       <div class="cd-unit"><span class="cd-num" id="cd-mins">--</span><span class="cd-lbl">Mins</span></div>
@@ -698,31 +476,27 @@ section,footer{padding:5rem 1.2rem;position:relative;}
   </div>
 </section>
 
-<!-- EVENT -->
+<!-- EVENT DETAILS -->
 <section id="event-section">
-  <div class="reveal tc">
+  <div class="reveal">
     <span class="sec-label">The Auspicious Occasion</span>
-    <h2 class="sec-heading">Varmala</h2>
-    <p style="font-style:italic;color:var(--text-mid);font-size:1.05rem;margin-top:.25rem">
-      Two hearts, two garlands, one beautiful beginning
-    </p>
+    <h2 class="sec-heading">Festivities</h2>
   </div>
-
-  <div class="evt-block reveal reveal-d1">
-    <div class="evt-card">
-      <div class="evt-grid">
-        <div class="evt-item">
-          <div class="ei-label">Function</div>
-          <div class="ei-value">Varmala</div>
-        </div>
-        <div class="evt-item">
-          <div class="ei-label">Date</div>
-          <div class="ei-value">9th July<br>2026</div>
-        </div>
-        <div class="evt-item">
-          <div class="ei-label">Time</div>
-          <div class="ei-value">12:45 PM</div>
-        </div>
+  <div class="evt-card reveal reveal-d1">
+    <span class="evt-name">Varmala</span>
+    <p class="evt-sub">Join us as Yash &amp; Sakshi exchange garlands<br>and begin their journey together</p>
+    <div class="evt-grid">
+      <div class="evt-item">
+        <div class="ei-label">Function</div>
+        <div class="ei-value">Varmala</div>
+      </div>
+      <div class="evt-item">
+        <div class="ei-label">Date</div>
+        <div class="ei-value">9th July<br/>2026</div>
+      </div>
+      <div class="evt-item">
+        <div class="ei-label">Time</div>
+        <div class="ei-value">12:45 PM</div>
       </div>
     </div>
   </div>
@@ -730,22 +504,33 @@ section,footer{padding:5rem 1.2rem;position:relative;}
 
 <!-- VENUE -->
 <section id="venue-section">
-  <div class="reveal tc">
-    <span class="sec-label">Where We Celebrate</span>
-    <h2 class="sec-heading">The Venue</h2>
+  <div class="reveal">
+    <span class="sec-label">The Destination</span>
+    <h2 class="sec-heading">Venue</h2>
   </div>
 
   <div class="venue-card reveal reveal-d1">
-    <span class="venue-icon">&#128205;</span>
-    <div class="venue-name">Sweet Home</div>
-    <div class="venue-address">
-      Ahilyanagar<br>Pune&#x2013;Nagar Road, Maharashtra
+    <!-- Google Maps embed showing venue area -->
+    <div class="venue-map">
+      <iframe
+        src="https://maps.google.com/maps?q=Sweet+Home+Ahilyanagar+Pune+Nagar+Road+Maharashtra&output=embed&hl=en"
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        title="Venue location map">
+      </iframe>
     </div>
+
+    <span class="venue-name-big">Sweet Home</span>
+    <div class="venue-address">
+      Ahilyanagar, Pune&#x2013;Nagar Road<br/>Maharashtra, India
+    </div>
+
     <a class="dir-btn"
-       href="https://www.google.com/maps/search/?api=1&query=Ahilyanagar+Pune+Nagar+Road+Maharashtra"
-       target="_blank" rel="noopener noreferrer" aria-label="Get directions to Sweet Home venue">
+       href="https://share.google/OZrGDBMlSxVK3SUPK"
+       target="_blank" rel="noopener noreferrer"
+       aria-label="Get directions to venue">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/>
+        <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z"/>
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
       </svg>
       Get Directions
     </a>
@@ -754,11 +539,10 @@ section,footer{padding:5rem 1.2rem;position:relative;}
 
 <!-- SIGNATURES -->
 <section id="signatures-section">
-  <div class="reveal tc">
+  <div class="reveal">
     <span class="sec-label">With Love</span>
-    <h2 class="sec-heading">Our Signatures</h2>
+    <h2 class="sec-heading">Signatures</h2>
   </div>
-
   <div class="signatures-wrap reveal reveal-d1">
     <div class="sig">
       <span class="sig-name">Yash</span>
@@ -774,7 +558,7 @@ section,footer{padding:5rem 1.2rem;position:relative;}
   </div>
 </section>
 
-<!-- FOOTER / WARM REGARDS -->
+<!-- WARM REGARDS FOOTER -->
 <footer id="footer-section">
   <div class="footer-flower-bar reveal">
     <span>&#x1F338;</span><span>&#x1F33C;</span><span>&#x1F33A;</span>
@@ -783,21 +567,24 @@ section,footer{padding:5rem 1.2rem;position:relative;}
 
   <div class="reveal reveal-d1">
     <p class="wr-label">
-      With great joy and warmth in our hearts,<br>
-      we invite you to share in the blessings of our union<br>
-      and celebrate this beautiful new chapter with us.
+      Your presence will grace our sacred union with the warmth of love and positivity.<br/>
+      Come, bestow your blessings, share our joy, and celebrate this beautiful new chapter with us!
     </p>
+
+    <div class="wr-regards">Warm regards,</div>
+    <div class="wr-family">Gandhi Family &amp; Munot Family</div>
+
     <span class="wr-names">Yash &amp; Sakshi</span>
     <div class="wr-hindi">&#x938;&#x93E;&#x926;&#x930; &#x906;&#x92E;&#x902;&#x924;&#x94D;&#x930;&#x923; &#x939;&#x948;</div>
-    <div class="wr-sub">&#x2736; &nbsp; With warm regards &nbsp; &#x2736;</div>
+    <div class="wr-sub">&#x2736; &nbsp; With love &amp; blessings &nbsp; &#x2736;</div>
   </div>
 </footer>
 
 </div><!-- /#main-content -->
 
-<!-- Music toggle button -->
-<button id="audio-btn" aria-label="Play music" title="Toggle music">
-  <svg id="icon-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<!-- Music toggle -->
+<button id="audio-btn" aria-label="Mute music" title="Toggle music">
+  <svg id="icon-sound" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
     <path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/>
   </svg>
   <svg id="icon-mute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none">
@@ -812,62 +599,46 @@ section,footer{padding:5rem 1.2rem;position:relative;}
 </div>
 
 <script>
-/* ═══════════════════════════════════════
-   STATE
-═══════════════════════════════════════ */
-var ytPlayer   = null;
-var ytReady    = false;
-var isMuted    = true;   /* starts muted for autoplay */
-var isPlaying  = false;
-var opened     = false;
+/* ═══ STATE ═══════════════════════════════════════════════ */
+var ytPlayer = null, ytReady = false, isMuted = true, isPlaying = false, opened = false;
 
-/* ═══════════════════════════════════════
-   ENTRY GATE
-═══════════════════════════════════════ */
+/* ═══ ENTRY GATE ══════════════════════════════════════════ */
 document.getElementById('entry-play-btn').addEventListener('click', function () {
   if (opened) return;
   opened = true;
 
-  var gate = document.getElementById('entry-gate');
-  gate.classList.add('open-up');
+  document.getElementById('entry-gate').classList.add('open-up');
 
   var main = document.getElementById('main-content');
   main.setAttribute('aria-hidden','false');
   main.classList.add('visible');
 
-  /* Unmute YouTube (autoplay was muted) */
+  /* Unmute — browser allows sound after user gesture */
   if (ytReady && ytPlayer && typeof ytPlayer.unMute === 'function') {
     ytPlayer.unMute();
     ytPlayer.setVolume(65);
   }
-  isMuted = false;
-  isPlaying = true;
+  isMuted = false; isPlaying = true;
 
-  /* Show music toggle button */
   setTimeout(function () {
     var btn = document.getElementById('audio-btn');
-    btn.classList.add('show');
-    btn.classList.add('playing');
-  }, 800);
+    btn.classList.add('show','playing');
+    updateMusicBtn();
+  }, 900);
 
-  /* Start petals */
-  setTimeout(startPetals, 1200);
-
-  /* Remove gate from DOM after transition */
-  setTimeout(function () { gate.remove(); }, 1200);
+  setTimeout(startPetals, 1300);
+  setTimeout(function () { document.getElementById('entry-gate').remove(); }, 1200);
 });
 
-/* ═══════════════════════════════════════
-   YOUTUBE IFRAME API
-   Song: Kudmayi — Rocky Aur Rani Ki Prem Kahaani
-═══════════════════════════════════════ */
+/* ═══ YOUTUBE — Kudmayi, skip first 5 s ══════════════════ */
 window.onYouTubeIframeAPIReady = function () {
   ytReady = true;
   ytPlayer = new YT.Player('yt-player', {
     videoId: '3qpxJEp4Ec4',
     playerVars: {
-      autoplay:       1,   /* auto-start muted */
+      autoplay:       1,
       mute:           1,
+      start:          5,   /* skip 5-second intro */
       controls:       0,
       loop:           1,
       playlist:       '3qpxJEp4Ec4',
@@ -877,7 +648,7 @@ window.onYouTubeIframeAPIReady = function () {
     events: {
       onReady: function (e) {
         e.target.setVolume(65);
-        e.target.mute();   /* ensure muted until open */
+        e.target.mute();
       },
       onStateChange: function (e) {
         isPlaying = (e.data === YT.PlayerState.PLAYING);
@@ -886,196 +657,111 @@ window.onYouTubeIframeAPIReady = function () {
     }
   });
 };
+(function () { var s = document.createElement('script'); s.src = 'https://www.youtube.com/iframe_api'; document.head.appendChild(s); }());
 
-/* Load YouTube IFrame API */
-(function () {
-  var s = document.createElement('script');
-  s.src = 'https://www.youtube.com/iframe_api';
-  document.head.appendChild(s);
-}());
-
-/* Music toggle button */
 document.getElementById('audio-btn').addEventListener('click', function () {
   if (!ytReady || !ytPlayer || typeof ytPlayer.unMute !== 'function') return;
   if (isMuted) {
-    ytPlayer.unMute();
-    ytPlayer.setVolume(65);
+    ytPlayer.unMute(); ytPlayer.setVolume(65);
     if (!isPlaying) ytPlayer.playVideo();
     isMuted = false;
   } else {
-    ytPlayer.mute();
-    isMuted = true;
+    ytPlayer.mute(); isMuted = true;
   }
   updateMusicBtn();
 });
 
 function updateMusicBtn () {
   var btn = document.getElementById('audio-btn');
-  var iconPlay = document.getElementById('icon-play');
-  var iconMute = document.getElementById('icon-mute');
-  if (isMuted) {
-    iconPlay.style.display = 'none';
-    iconMute.style.display = '';
-    btn.classList.remove('playing');
-    btn.setAttribute('aria-label','Unmute music');
-  } else {
-    iconPlay.style.display = '';
-    iconMute.style.display = 'none';
-    btn.classList.add('playing');
-    btn.setAttribute('aria-label','Mute music');
-  }
+  document.getElementById('icon-sound').style.display = isMuted ? 'none' : '';
+  document.getElementById('icon-mute').style.display  = isMuted ? '' : 'none';
+  btn.classList.toggle('playing', !isMuted);
+  btn.setAttribute('aria-label', isMuted ? 'Unmute music' : 'Mute music');
 }
 
-/* ═══════════════════════════════════════
-   ENTRY GATE SPARKLES
-═══════════════════════════════════════ */
+/* ═══ ENTRY GATE SPARKLES ═════════════════════════════════ */
 (function () {
   var gate = document.getElementById('entry-gate');
   for (var i = 0; i < 28; i++) {
-    (function (idx) {
+    (function () {
       var s = document.createElement('div');
       s.className = 'sparkle';
-      var size = 2 + Math.random() * 4;
-      s.style.cssText = [
-        'left:'  + (Math.random() * 100) + 'vw',
-        'bottom:' + (Math.random() * 40)  + 'vh',
-        'width:'  + size + 'px',
-        'height:' + size + 'px',
-        'animation-duration:'+ (4 + Math.random() * 6) + 's',
-        'animation-delay:'   + (Math.random() * 6)     + 's'
-      ].join(';');
+      var sz = 2 + Math.random() * 4;
+      s.style.cssText = 'left:'+(Math.random()*100)+'vw;bottom:'+(Math.random()*40)+'vh;width:'+sz+'px;height:'+sz+'px;animation-duration:'+(4+Math.random()*6)+'s;animation-delay:'+(Math.random()*6)+'s';
       gate.appendChild(s);
-    }(i));
+    }());
   }
 }());
 
-/* ═══════════════════════════════════════
-   CANVAS PETALS & FLOWERS
-═══════════════════════════════════════ */
+/* ═══ CANVAS PETALS + MARIGOLD FLOWERS ═══════════════════ */
 function startPetals () {
   var canvas = document.getElementById('petals-canvas');
-  var ctx    = canvas.getContext('2d');
+  var ctx = canvas.getContext('2d');
+  function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  resize(); window.addEventListener('resize', resize, {passive:true});
 
-  function resize () {
-    canvas.width  = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  resize();
-  window.addEventListener('resize', resize);
-
-  /* Petal / flower shapes */
-  var PARTICLES = [];
   var TYPES = [
-    {type:'petal', colors:['#ff9eaf','#d63a5a','#ff8fab','#c93060']},
-    {type:'petal', colors:['#ffb3c1','#e05070','#ffc2d1','#e06080']},
-    {type:'marigold', colors:['#FF8C00','#FF6500','#FFA500']},
-    {type:'yellow',   colors:['#FFD700','#F5D76E','#FFE066']}
+    {t:'petal',c:['#ff9eaf','#d63a5a']},{t:'petal',c:['#ffb3c1','#e05070']},
+    {t:'flower',c:['#FF8C00','#FF6500']},{t:'flower',c:['#FFD700','#F5D76E']},
+    {t:'petal',c:['#ffc2d1','#e06080']},{t:'flower',c:['#FFA500','#FF8C00']}
   ];
-
-  for (var i = 0; i < 35; i++) {
-    var t = TYPES[Math.floor(Math.random() * TYPES.length)];
-    PARTICLES.push({
-      x:      Math.random() * window.innerWidth,
-      y:      -20 - Math.random() * window.innerHeight,
-      size:   5  + Math.random() * 9,
-      speed:  0.5 + Math.random() * 1.2,
-      drift:  (Math.random() - 0.5) * 0.6,
-      rot:    Math.random() * Math.PI * 2,
-      rotS:   (Math.random() - 0.5) * 0.04,
-      opacity:0.5 + Math.random() * 0.5,
-      color:  t.colors[Math.floor(Math.random() * t.colors.length)],
-      type:   t.type
-    });
+  var P = [];
+  for (var i = 0; i < 40; i++) {
+    var T = TYPES[i % TYPES.length];
+    P.push({x:Math.random()*window.innerWidth,y:-20-Math.random()*window.innerHeight,
+      sz:5+Math.random()*9,spd:.5+Math.random()*1.2,drft:(Math.random()-.5)*.7,
+      rot:Math.random()*Math.PI*2,rotS:(Math.random()-.5)*.04,
+      op:.5+Math.random()*.5,col:T.c[0],col2:T.c[1],t:T.t});
   }
 
-  function drawPetal (ctx, p) {
-    ctx.save();
-    ctx.translate(p.x, p.y);
-    ctx.rotate(p.rot);
-    ctx.globalAlpha = p.opacity;
-    ctx.fillStyle = p.color;
-    ctx.beginPath();
-    ctx.ellipse(0, 0, p.size * 0.5, p.size, 0, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.restore();
-  }
-
-  function drawFlower (ctx, p) {
-    ctx.save();
-    ctx.translate(p.x, p.y);
-    ctx.rotate(p.rot);
-    ctx.globalAlpha = p.opacity * 0.85;
-    /* 6 petals */
-    for (var k = 0; k < 6; k++) {
-      ctx.save();
-      ctx.rotate((k / 6) * Math.PI * 2);
-      ctx.fillStyle = p.color;
-      ctx.beginPath();
-      ctx.ellipse(0, -p.size * 0.6, p.size * 0.3, p.size * 0.55, 0, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.restore();
-    }
-    /* center */
-    ctx.fillStyle = p.type === 'yellow' ? '#A0832A' : '#FFD700';
-    ctx.beginPath();
-    ctx.arc(0, 0, p.size * 0.3, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.restore();
-  }
-
-  function animate () {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    PARTICLES.forEach(function (p) {
-      p.y   += p.speed;
-      p.x   += p.drift;
-      p.rot += p.rotS;
-      if (p.y > canvas.height + 30) {
-        p.y = -20;
-        p.x = Math.random() * canvas.width;
+  function draw(p){
+    ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot); ctx.globalAlpha = p.op;
+    if (p.t === 'petal') {
+      ctx.fillStyle = p.col; ctx.beginPath();
+      ctx.ellipse(0,0,p.sz*.5,p.sz,0,0,Math.PI*2); ctx.fill();
+    } else {
+      for (var k=0;k<6;k++){
+        ctx.save(); ctx.rotate(k/6*Math.PI*2);
+        ctx.fillStyle = p.col; ctx.beginPath();
+        ctx.ellipse(0,-p.sz*.65,p.sz*.3,p.sz*.58,0,0,Math.PI*2); ctx.fill();
+        ctx.restore();
       }
-      if (p.type === 'petal') drawPetal(ctx, p);
-      else                    drawFlower(ctx, p);
-    });
-    requestAnimationFrame(animate);
+      ctx.fillStyle=p.col2; ctx.beginPath(); ctx.arc(0,0,p.sz*.3,0,Math.PI*2); ctx.fill();
+    }
+    ctx.restore();
   }
-  animate();
+
+  (function loop(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    P.forEach(function(p){
+      p.y+=p.spd; p.x+=p.drft; p.rot+=p.rotS;
+      if(p.y>canvas.height+30){p.y=-20;p.x=Math.random()*canvas.width;}
+      draw(p);
+    });
+    requestAnimationFrame(loop);
+  }());
 }
 
-/* ═══════════════════════════════════════
-   COUNTDOWN TIMER
-═══════════════════════════════════════ */
-function pad (n) { return String(n).padStart(2,'0'); }
-function tick () {
-  /* 9 July 2026 12:45 IST = 07:15 UTC */
+/* ═══ COUNTDOWN ══════════════════════════════════════════ */
+function pad(n){return String(n).padStart(2,'0');}
+function tick(){
   var diff = new Date('2026-07-09T07:15:00Z').getTime() - Date.now();
-  if (diff <= 0) {
-    document.getElementById('cd-grid') && (document.getElementById('cd-grid').style.display='none');
-    document.getElementById('cd-done').style.display = 'block';
-    return;
+  if (diff<=0) {
+    var g=document.getElementById('cd-grid'); if(g) g.style.display='none';
+    document.getElementById('cd-done').style.display='block'; return;
   }
   document.getElementById('cd-days').textContent  = pad(Math.floor(diff/86400000));
   document.getElementById('cd-hours').textContent = pad(Math.floor((diff%86400000)/3600000));
   document.getElementById('cd-mins').textContent  = pad(Math.floor((diff%3600000)/60000));
   document.getElementById('cd-secs').textContent  = pad(Math.floor((diff%60000)/1000));
 }
-tick();
-setInterval(tick, 1000);
+tick(); setInterval(tick,1000);
 
-/* ═══════════════════════════════════════
-   SCROLL REVEAL
-═══════════════════════════════════════ */
-var observer = new IntersectionObserver(function (entries) {
-  entries.forEach(function (e) {
-    if (e.isIntersecting) {
-      e.target.classList.add('revealed');
-      observer.unobserve(e.target);
-    }
-  });
-}, {threshold: 0.15});
-
-document.querySelectorAll('.reveal').forEach(function (el) {
-  observer.observe(el);
-});
+/* ═══ SCROLL REVEAL ══════════════════════════════════════ */
+var io = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){ if(e.isIntersecting){e.target.classList.add('revealed');io.unobserve(e.target);} });
+},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 </script>
 </body>
 </html>

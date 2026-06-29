@@ -665,12 +665,13 @@ section,footer{padding:5rem 1.2rem;position:relative;text-align:center;}
 
 <script>
 /* ═══ STATE ═══════════════════════════════════════════════ */
-var ytPlayer = null, ytReady = false, isMuted = true, isPlaying = false, opened = false;
+var ytPlayer = null, ytReady = false, isMuted = true, isPlaying = false, opened = false, gestureUnlocked = false;
 
 /* ═══ ENTRY GATE ══════════════════════════════════════════ */
 document.getElementById('entry-play-btn').addEventListener('click', function () {
   if (opened) return;
   opened = true;
+  gestureUnlocked = true;
 
   document.getElementById('entry-gate').classList.add('open-up');
 
@@ -678,10 +679,12 @@ document.getElementById('entry-play-btn').addEventListener('click', function () 
   main.setAttribute('aria-hidden','false');
   main.classList.add('visible');
 
-  /* Unmute — browser allows sound after user gesture */
-  if (ytReady && ytPlayer && typeof ytPlayer.unMute === 'function') {
+  /* Restart from second 5 and unmute — browser allows sound after user gesture */
+  if (ytReady && ytPlayer && typeof ytPlayer.seekTo === 'function') {
+    ytPlayer.seekTo(5, true);
     ytPlayer.unMute();
     ytPlayer.setVolume(65);
+    ytPlayer.playVideo();
   }
   isMuted = false; isPlaying = true;
 
@@ -713,7 +716,13 @@ window.onYouTubeIframeAPIReady = function () {
     events: {
       onReady: function (e) {
         e.target.setVolume(65);
-        e.target.mute();
+        if (gestureUnlocked) {
+          e.target.seekTo(5, true);
+          e.target.unMute();
+          e.target.playVideo();
+        } else {
+          e.target.mute();
+        }
       },
       onStateChange: function (e) {
         isPlaying = (e.data === YT.PlayerState.PLAYING);

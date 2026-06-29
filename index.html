@@ -79,9 +79,6 @@ body{background:var(--deeper-red);color:var(--cream);font-family:'Cormorant Gara
 .reveal{opacity:0;transform:translateY(28px);transition:opacity 1.1s ease,transform 1.1s ease;transition-delay:calc(var(--ri,0) * .18s);}
 .reveal.revealed{opacity:1;transform:translateY(0);}
 .reveal-d1{transition-delay:.15s;}.reveal-d2{transition-delay:.3s;}.reveal-d3{transition-delay:.45s;}
-/* Gallery items: fade+slide in on scroll, then hand off to CSS animations */
-.gallery-item.reveal.revealed{animation-play-state:running;}
-.gallery-item.reveal:not(.revealed){animation-play-state:paused;}
 
 #petals-canvas{position:fixed;top:0;left:0;width:100%;height:100dvh;pointer-events:none;z-index:5;}
 
@@ -234,55 +231,97 @@ section,footer{padding:5rem 1.2rem;position:relative;text-align:center;}
 .dir-btn:hover{background:var(--gold-l);transform:translateY(-3px);box-shadow:0 10px 28px rgba(212,175,55,.55);}
 .dir-btn svg{width:16px;height:16px;flex-shrink:0;}
 
-/* ═══ GALLERY ══════════════════════════════════ */
-#gallery-section{background:linear-gradient(180deg,#A8203A 0%,#A8203A 100%);border-top:1px solid var(--border);}
-.gallery-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;max-width:580px;margin:2rem auto 0;}
-@media(min-width:700px){.gallery-grid{grid-template-columns:repeat(4,1fr);gap:14px;}}
+/* ═══ PHOTO STORY (SCROLL) ══════════════════════ */
+#gallery-section{background:#A8203A;border-top:1px solid var(--border);padding-bottom:0;}
+.photo-story{margin-top:2rem;}
 
-/* Each photo card animates in from a different side */
-.gallery-item{
-  position:relative;overflow:hidden;
-  border:2px solid var(--gold-d);
-  box-shadow:0 0 0 3px #A8203A,0 0 0 4px var(--gold-d),0 8px 24px rgba(0,0,0,.35);
-  aspect-ratio:3/4;cursor:pointer;
-  transition:transform .4s cubic-bezier(.175,.885,.32,1.275),
-             box-shadow .4s ease,
-             border-color .4s ease;
+.photo-slide{
+  position:relative;width:100%;height:88dvh;
+  overflow:hidden;cursor:pointer;
 }
-.gallery-item:hover{
-  transform:translateY(-8px) scale(1.03);
-  border-color:var(--gold-l);
-  box-shadow:0 0 0 3px #A8203A,0 0 0 5px var(--gold-l),0 20px 40px rgba(0,0,0,.5),0 0 30px rgba(212,175,55,.3);
-}
-/* Ken Burns slow zoom on each image — different start positions */
-.gallery-item img{
+.photo-slide+.photo-slide{border-top:1px solid var(--border);}
+.photo-slide img{
   display:block;width:100%;height:100%;object-fit:cover;
-  transform-origin:center center;
-  animation:kenBurns1 14s ease-in-out infinite alternate;
-  transition:none;
+  transform:scale(1.12);
+  transition:transform 1.8s cubic-bezier(.25,.46,.45,.94);
+  will-change:transform;
 }
-.gallery-item:nth-child(2) img{animation-name:kenBurns2;animation-delay:-3.5s;}
-.gallery-item:nth-child(3) img{animation-name:kenBurns3;animation-delay:-7s;}
-.gallery-item:nth-child(4) img{animation-name:kenBurns4;animation-delay:-10.5s;}
-@keyframes kenBurns1{from{transform:scale(1) translate(0,0);}to{transform:scale(1.12) translate(-3%,-2%);}}
-@keyframes kenBurns2{from{transform:scale(1.1) translate(2%,1%);}to{transform:scale(1) translate(0,0);}}
-@keyframes kenBurns3{from{transform:scale(1) translate(0,0);}to{transform:scale(1.1) translate(2%,-2%);}}
-@keyframes kenBurns4{from{transform:scale(1.08) translate(-1%,2%);}to{transform:scale(1) translate(0,0);}}
+.photo-slide.ps-on img{transform:scale(1);}
+/* slow drift once revealed */
+.photo-slide.ps-on img{animation:kbDrift 22s ease-in-out infinite alternate;}
+@keyframes kbDrift{from{transform:scale(1) translate(0,0);}to{transform:scale(1.06) translate(2%,-1.5%);}}
 
-/* Gold shimmer pulse on each card border, staggered */
-@keyframes borderGlow{
-  0%,100%{box-shadow:0 0 0 3px #A8203A,0 0 0 4px var(--gold-d),0 8px 24px rgba(0,0,0,.35);}
-  50%{box-shadow:0 0 0 3px #A8203A,0 0 0 5px var(--gold-l),0 8px 24px rgba(0,0,0,.35),0 0 18px rgba(212,175,55,.4);}
+/* Dark gradient overlay */
+.photo-slide::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(100,15,30,.72) 0%,rgba(100,15,30,.18) 45%,transparent 75%);
+  pointer-events:none;
 }
-.gallery-item:nth-child(1){animation:borderGlow 4s ease-in-out infinite;}
-.gallery-item:nth-child(2){animation:borderGlow 4s ease-in-out infinite 1s;}
-.gallery-item:nth-child(3){animation:borderGlow 4s ease-in-out infinite 2s;}
-.gallery-item:nth-child(4){animation:borderGlow 4s ease-in-out infinite 3s;}
-.gallery-item:hover{animation:none;}
+/* Caption slides up on reveal */
+.photo-slide-caption{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:2rem 1.5rem 2.5rem;
+  text-align:center;z-index:1;
+  transform:translateY(18px);opacity:0;
+  transition:transform .9s ease .45s,opacity .9s ease .45s;
+}
+.photo-slide.ps-on .photo-slide-caption{transform:translateY(0);opacity:1;}
+.ps-num{
+  font-family:'Cinzel Decorative',serif;
+  font-size:.65rem;letter-spacing:.45em;
+  color:rgba(212,175,55,.72);display:block;margin-bottom:.35rem;
+}
+.ps-name{
+  font-family:'Great Vibes',cursive;
+  font-size:clamp(2.5rem,9vw,4rem);
+  color:#fff;line-height:1.15;display:block;
+  text-shadow:0 2px 24px rgba(0,0,0,.55);
+}
+.ps-tap{
+  font-family:'Cormorant Garamond',serif;
+  font-size:.68rem;font-weight:600;
+  letter-spacing:.3em;text-transform:uppercase;
+  color:rgba(212,175,55,.6);margin-top:.5rem;display:block;
+}
 
-/* Gradient overlay at bottom */
-.gallery-item::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(100,10,25,.5) 0%,transparent 55%);pointer-events:none;transition:opacity .4s;}
-.gallery-item:hover::after{opacity:.4;}
+/* Gold pulse on left side bar */
+.photo-slide::before{
+  content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);
+  width:3px;height:0;background:var(--gold);
+  transition:height 1.2s ease .3s;z-index:2;
+}
+.photo-slide.ps-on::before{height:60%;}
+
+/* ═══ MUSIC VISUALIZER ══════════════════════════ */
+#music-viz{
+  position:fixed;bottom:38px;right:84px;z-index:9400;
+  display:flex;align-items:flex-end;gap:3px;height:28px;
+  opacity:0;pointer-events:none;transition:opacity .4s;
+}
+#music-viz.show{opacity:1;}
+.viz-bar{
+  width:4px;border-radius:3px 3px 1px 1px;
+  background:linear-gradient(to top,var(--gold-d),var(--gold-l));
+  animation:vizDance .9s ease-in-out infinite;
+  transform-origin:bottom;
+}
+.viz-bar:nth-child(1){height:10px;animation-delay:0s;}
+.viz-bar:nth-child(2){height:18px;animation-delay:.14s;}
+.viz-bar:nth-child(3){height:24px;animation-delay:.07s;}
+.viz-bar:nth-child(4){height:16px;animation-delay:.21s;}
+.viz-bar:nth-child(5){height:10px;animation-delay:.11s;}
+@keyframes vizDance{0%,100%{transform:scaleY(.25);}50%{transform:scaleY(1);}}
+#music-viz.muted .viz-bar{animation-play-state:paused;transform:scaleY(.18);}
+@media(max-width:480px){#music-viz{right:70px;bottom:26px;}}
+
+/* ═══ PROGRESS BAR ═══════════════════════════════ */
+#progress-bar{
+  position:fixed;top:0;left:0;height:3px;width:0%;
+  background:linear-gradient(90deg,var(--gold-d),var(--gold-l),var(--gold));
+  z-index:9999;pointer-events:none;
+  box-shadow:0 0 6px rgba(212,175,55,.5);
+  transition:width .08s linear;
+}
 
 /* Lightbox */
 #lightbox{display:none;position:fixed;inset:0;background:rgba(10,2,2,.92);z-index:9800;align-items:center;justify-content:center;padding:1.5rem;}
@@ -529,18 +568,38 @@ section,footer{padding:5rem 1.2rem;position:relative;text-align:center;}
     </p>
   </div>
 
-  <div class="gallery-grid">
-    <div class="gallery-item reveal" style="--ri:0" onclick="openLb(0)">
-      <img src="us1.jpeg" alt="Yash &amp; Sakshi" loading="lazy"/>
+  <div class="photo-story">
+    <div class="photo-slide" onclick="openLb(0)">
+      <img src="us1.jpeg" alt="Yash &amp; Sakshi" loading="eager"/>
+      <div class="photo-slide-caption">
+        <span class="ps-num">01 &nbsp;/&nbsp; 04</span>
+        <span class="ps-name">Yash &amp; Sakshi</span>
+        <span class="ps-tap">tap to view</span>
+      </div>
     </div>
-    <div class="gallery-item reveal" style="--ri:1" onclick="openLb(1)">
+    <div class="photo-slide" onclick="openLb(1)">
       <img src="us2.jpeg" alt="Yash &amp; Sakshi" loading="lazy"/>
+      <div class="photo-slide-caption">
+        <span class="ps-num">02 &nbsp;/&nbsp; 04</span>
+        <span class="ps-name">Yash &amp; Sakshi</span>
+        <span class="ps-tap">tap to view</span>
+      </div>
     </div>
-    <div class="gallery-item reveal" style="--ri:2" onclick="openLb(2)">
+    <div class="photo-slide" onclick="openLb(2)">
       <img src="us3.jpeg" alt="Yash &amp; Sakshi" loading="lazy"/>
+      <div class="photo-slide-caption">
+        <span class="ps-num">03 &nbsp;/&nbsp; 04</span>
+        <span class="ps-name">Yash &amp; Sakshi</span>
+        <span class="ps-tap">tap to view</span>
+      </div>
     </div>
-    <div class="gallery-item reveal" style="--ri:3" onclick="openLb(3)">
+    <div class="photo-slide" onclick="openLb(3)">
       <img src="us4.jpeg" alt="Yash &amp; Sakshi" loading="lazy"/>
+      <div class="photo-slide-caption">
+        <span class="ps-num">04 &nbsp;/&nbsp; 04</span>
+        <span class="ps-name">Yash &amp; Sakshi</span>
+        <span class="ps-tap">tap to view</span>
+      </div>
     </div>
   </div>
 </section>
@@ -626,6 +685,18 @@ section,footer{padding:5rem 1.2rem;position:relative;text-align:center;}
 
 </div><!-- /#main-content -->
 
+<!-- Scroll progress bar -->
+<div id="progress-bar" aria-hidden="true"></div>
+
+<!-- Music visualizer -->
+<div id="music-viz" aria-hidden="true">
+  <div class="viz-bar"></div>
+  <div class="viz-bar"></div>
+  <div class="viz-bar"></div>
+  <div class="viz-bar"></div>
+  <div class="viz-bar"></div>
+</div>
+
 <!-- Music toggle -->
 <button id="audio-btn" aria-label="Mute music" title="Toggle music">
   <svg id="icon-sound" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -666,7 +737,9 @@ document.getElementById('entry-play-btn').addEventListener('click', function () 
 
   setTimeout(function () {
     var btn = document.getElementById('audio-btn');
+    var viz = document.getElementById('music-viz');
     btn.classList.add('show','playing');
+    if (viz) viz.classList.add('show');
     updateMusicBtn();
   }, 900);
 
@@ -717,10 +790,14 @@ document.getElementById('audio-btn').addEventListener('click', function () {
 
 function updateMusicBtn () {
   var btn = document.getElementById('audio-btn');
+  var viz = document.getElementById('music-viz');
   document.getElementById('icon-sound').style.display = isMuted ? 'none' : '';
   document.getElementById('icon-mute').style.display  = isMuted ? '' : 'none';
   btn.classList.toggle('playing', !isMuted);
   btn.setAttribute('aria-label', isMuted ? 'Unmute music' : 'Mute music');
+  if (viz) {
+    viz.classList.toggle('muted', isMuted);
+  }
 }
 
 /* ═══ ENTRY GATE SPARKLES ═════════════════════════════════ */
@@ -806,7 +883,8 @@ var lbSrcs = ['us1.jpeg','us2.jpeg','us3.jpeg','us4.jpeg'];
 var lbIdx = 0;
 function openLb(i) {
   lbIdx = i;
-  document.getElementById('lb-img').src = lbSrcs[lbIdx];
+  var img = document.getElementById('lb-img');
+  img.src = lbSrcs[lbIdx];
   document.getElementById('lightbox').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
@@ -827,6 +905,39 @@ document.addEventListener('keydown', function(e) {
   if (e.key === 'ArrowLeft')  lbStep(-1);
   if (e.key === 'ArrowRight') lbStep(1);
 });
+
+/* Touch swipe on lightbox */
+(function() {
+  var lb = document.getElementById('lightbox');
+  var startX = 0, startY = 0;
+  lb.addEventListener('touchstart', function(e) {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+  }, {passive:true});
+  lb.addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - startX;
+    var dy = e.changedTouches[0].clientY - startY;
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 48) {
+      lbStep(dx < 0 ? 1 : -1);
+    }
+  }, {passive:true});
+}());
+
+/* ═══ PHOTO STORY REVEAL ═════════════════════════════════ */
+var psObs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    entry.target.classList.toggle('ps-on', entry.isIntersecting);
+  });
+}, {threshold: 0.2});
+document.querySelectorAll('.photo-slide').forEach(function(el) { psObs.observe(el); });
+
+/* ═══ SCROLL PROGRESS BAR ════════════════════════════════ */
+window.addEventListener('scroll', function() {
+  var h = document.documentElement;
+  var pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+  var bar = document.getElementById('progress-bar');
+  if (bar) bar.style.width = pct + '%';
+}, {passive: true});
 
 /* ═══ SCROLL REVEAL ══════════════════════════════════════ */
 var io = new IntersectionObserver(function(entries){

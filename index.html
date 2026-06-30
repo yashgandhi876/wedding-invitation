@@ -346,6 +346,13 @@ section,footer{padding:5rem 1.2rem;position:relative;text-align:center;}
 .wr-hindi{font-family:'Noto Serif Devanagari',serif;font-size:clamp(.9rem,3vw,1.1rem);color:var(--cream);opacity:.5;margin-top:.75rem;}
 .wr-sub{font-family:'Cinzel Decorative',serif;font-size:.63rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold-d);margin-top:2rem;}
 
+/* ═══ LANG BUTTON ═══════════════════════════════ */
+#lang-btn{position:fixed;bottom:26px;left:22px;z-index:9500;padding:0 14px;height:40px;border-radius:20px;background:linear-gradient(135deg,var(--gold-d),var(--gold));border:2px solid var(--gold-l);color:var(--dark-red);font-family:'Cinzel Decorative',serif;font-size:.6rem;font-weight:700;letter-spacing:.18em;cursor:pointer;box-shadow:0 4px 20px rgba(212,175,55,.45);transition:transform .3s;opacity:0;pointer-events:none;}
+#lang-btn.show{opacity:1;pointer-events:auto;}
+#lang-btn:hover{transform:scale(1.08);}
+.hi-only{display:none;}
+.lang-hi .hi-only{display:block;}
+
 /* ═══ RESPONSIVE ═══════════════════════════════ */
 @media(max-width:480px){
   .hero-card-inner{padding:1.5rem 1rem 2.5rem;}
@@ -353,6 +360,7 @@ section,footer{padding:5rem 1.2rem;position:relative;text-align:center;}
   .signatures-wrap{gap:.75rem;}
   .sig-name{font-size:clamp(2.5rem,9vw,3.5rem);}
   #audio-btn{bottom:18px;right:14px;width:46px;height:46px;}
+  #lang-btn{bottom:18px;left:14px;height:36px;padding:0 11px;}
 }
 @media(min-width:900px){section,footer{padding:6rem 2rem;}#hero{padding:4rem 2rem 7rem;}}
 </style>
@@ -375,7 +383,7 @@ section,footer{padding:5rem 1.2rem;position:relative;text-align:center;}
     <img src="Ganesha Icon.png" class="entry-ganesha" alt="Shree Ganesha"/>
 
     <div class="entry-blessing">&#x936;&#x94D;&#x930;&#x940; &#x917;&#x923;&#x947;&#x936;&#x93E;&#x92F; &#x928;&#x92E;&#x903;</div>
-    <div class="entry-eyebrow">You're Invited</div>
+    <div class="entry-eyebrow" data-t="youre-invited">You're Invited</div>
     <div class="entry-names">Y <span>&amp;</span> S</div>
 
     <div class="entry-btn-wrap">
@@ -385,8 +393,8 @@ section,footer{padding:5rem 1.2rem;position:relative;text-align:center;}
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
       </button>
     </div>
-    <p class="entry-play-label">Tap to open</p>
-    <p class="entry-play-hint">your invitation</p>
+    <p class="entry-play-label" data-t="tap-to-open">Tap to open</p>
+    <p class="entry-play-hint" data-t="your-invitation">your invitation</p>
   </div>
 
   <!-- Bottom garland (flipped) -->
@@ -412,7 +420,7 @@ section,footer{padding:5rem 1.2rem;position:relative;text-align:center;}
     <img src="Ganesha Icon.png" class="gp-ganesha" alt="Shree Ganesha"/>
 
     <span class="gp-title">&#x936;&#x94D;&#x930;&#x940; &#x917;&#x923;&#x947;&#x936;&#x93E;&#x92F; &#x928;&#x92E;&#x903;</span>
-    <div class="gp-sub">Shubh Vivah</div>
+    <div class="gp-sub" data-t="shubh-vivah">Shubh Vivah</div>
     <div class="gp-divider"><span>&#x2736;</span></div>
   </div>
 </section>
@@ -423,7 +431,7 @@ section,footer{padding:5rem 1.2rem;position:relative;text-align:center;}
     <div class="hero-corner"><span></span></div>
     <div class="hero-card-inner">
       <span class="hero-om">&#x950;</span>
-      <div class="hero-shubh">&#x2736; &nbsp; Shubh Vivah &nbsp; &#x2736;</div>
+      <div class="hero-shubh" data-t="shubh-vivah-hero">&#x2736; &nbsp; Shubh Vivah &nbsp; &#x2736;</div>
 
       <div class="mandala-wrap">
         <svg class="mandala-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -465,13 +473,13 @@ section,footer{padding:5rem 1.2rem;position:relative;text-align:center;}
       <span class="couple-name">Yash</span>
       <div class="amp-row">
         <div class="amp-line"></div>
-        <span class="amp-sym">with</span>
+        <span class="amp-sym" data-t="with">with</span>
         <div class="amp-line"></div>
       </div>
       <span class="couple-name">Sakshi</span>
       <div class="divider-bar"><span class="divider-bar-icon">&#x2736;</span></div>
 
-      <p class="hero-invite">
+      <p class="hero-invite" data-t="hero-invite">
         Together they begin a journey of love,<br/>
         and together we celebrate this beautiful beginning.
       </p>
@@ -479,7 +487,7 @@ section,footer{padding:5rem 1.2rem;position:relative;text-align:center;}
   </div>
 
   <div class="scroll-indicator" onclick="document.getElementById('varmala-section').scrollIntoView({behavior:'smooth'})">
-    <span>Scroll to explore</span>
+    <span data-t="scroll-explore">Scroll to explore</span>
     <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
       <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
     </svg>
@@ -489,9 +497,9 @@ section,footer{padding:5rem 1.2rem;position:relative;text-align:center;}
 <!-- VARMALA CEREMONY PHOTO -->
 <section id="varmala-section">
   <div class="reveal">
-    <span class="sec-label">The Sacred Moment</span>
-    <h2 class="sec-heading">Varmala</h2>
-    <p style="font-style:italic;color:var(--text-mid);font-size:clamp(.95rem,3vw,1.1rem);margin-top:.2rem">
+    <span class="sec-label" data-t="varmala-label">The Sacred Moment</span>
+    <h2 class="sec-heading" data-t="varmala-heading">Varmala</h2>
+    <p style="font-style:italic;color:var(--text-mid);font-size:clamp(.95rem,3vw,1.1rem);margin-top:.2rem" data-t="varmala-sub">
       Two hearts, two garlands, one beautiful beginning
     </p>
   </div>
@@ -506,16 +514,16 @@ section,footer{padding:5rem 1.2rem;position:relative;text-align:center;}
 <!-- COUNTDOWN -->
 <section id="countdown-section">
   <div class="cd-card reveal">
-    <p class="cd-quote">A lifetime of togetherness begins with one sacred step</p>
-    <span class="cd-script">The Wedding Day</span>
+    <p class="cd-quote" data-t="cd-quote">A lifetime of togetherness begins with one sacred step</p>
+    <span class="cd-script" data-t="cd-script">The Wedding Day</span>
     <span class="cd-date-lbl reveal reveal-d1">09 &nbsp;&#xB7;&nbsp; 07 &nbsp;&#xB7;&nbsp; 2026</span>
     <div class="cd-grid reveal reveal-d2" id="cd-grid">
-      <div class="cd-unit"><span class="cd-num" id="cd-days">--</span><span class="cd-lbl">Days</span></div>
-      <div class="cd-unit"><span class="cd-num" id="cd-hours">--</span><span class="cd-lbl">Hours</span></div>
-      <div class="cd-unit"><span class="cd-num" id="cd-mins">--</span><span class="cd-lbl">Mins</span></div>
-      <div class="cd-unit"><span class="cd-num" id="cd-secs">--</span><span class="cd-lbl">Secs</span></div>
+      <div class="cd-unit"><span class="cd-num" id="cd-days">--</span><span class="cd-lbl" data-t="cd-days">Days</span></div>
+      <div class="cd-unit"><span class="cd-num" id="cd-hours">--</span><span class="cd-lbl" data-t="cd-hours">Hours</span></div>
+      <div class="cd-unit"><span class="cd-num" id="cd-mins">--</span><span class="cd-lbl" data-t="cd-mins">Mins</span></div>
+      <div class="cd-unit"><span class="cd-num" id="cd-secs">--</span><span class="cd-lbl" data-t="cd-secs">Secs</span></div>
     </div>
-    <div class="cd-done" id="cd-done">The celebration has begun! &#x1F389;</div>
+    <div class="cd-done" id="cd-done" data-t="cd-done">The celebration has begun! &#x1F389;</div>
   </div>
 </section>
 
@@ -523,9 +531,9 @@ section,footer{padding:5rem 1.2rem;position:relative;text-align:center;}
 <!-- GALLERY -->
 <section id="gallery-section">
   <div class="reveal">
-    <span class="sec-label">The Couple</span>
-    <h2 class="sec-heading">Our Moments</h2>
-    <p style="font-style:italic;color:var(--text-mid);font-size:clamp(.95rem,3vw,1.1rem);margin-top:.2rem">
+    <span class="sec-label" data-t="gallery-label">The Couple</span>
+    <h2 class="sec-heading" data-t="gallery-heading">Our Moments</h2>
+    <p style="font-style:italic;color:var(--text-mid);font-size:clamp(.95rem,3vw,1.1rem);margin-top:.2rem" data-t="gallery-sub">
       A glimpse of our journey together
     </p>
   </div>
@@ -536,7 +544,7 @@ section,footer{padding:5rem 1.2rem;position:relative;text-align:center;}
       <div class="photo-slide-caption">
         <span class="ps-num">01 &nbsp;/&nbsp; 02</span>
         <span class="ps-name">Yash &amp; Sakshi</span>
-        <span class="ps-tap">tap to view</span>
+        <span class="ps-tap" data-t="ps-tap">tap to view</span>
       </div>
     </div>
     <div class="photo-slide" onclick="openLb(1)">
@@ -544,7 +552,7 @@ section,footer{padding:5rem 1.2rem;position:relative;text-align:center;}
       <div class="photo-slide-caption">
         <span class="ps-num">02 &nbsp;/&nbsp; 02</span>
         <span class="ps-name">Yash &amp; Sakshi</span>
-        <span class="ps-tap">tap to view</span>
+        <span class="ps-tap" data-t="ps-tap">tap to view</span>
       </div>
     </div>
   </div>
@@ -563,13 +571,13 @@ section,footer{padding:5rem 1.2rem;position:relative;text-align:center;}
 <!-- VENUE -->
 <section id="venue-section">
   <div class="reveal">
-    <span class="sec-label">The Destination</span>
-    <h2 class="sec-heading">Venue</h2>
+    <span class="sec-label" data-t="venue-label">The Destination</span>
+    <h2 class="sec-heading" data-t="venue-heading">Venue</h2>
   </div>
 
   <div class="venue-card reveal reveal-d1">
     <span class="venue-name-big">Sweet Home Fun N Food</span>
-    <div class="venue-address">
+    <div class="venue-address" data-t="venue-address">
       Ahilyanagar, Pune&#x2013;Nagar Road<br/>Maharashtra, India
     </div>
 
@@ -581,7 +589,7 @@ section,footer{padding:5rem 1.2rem;position:relative;text-align:center;}
         <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z"/>
         <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
       </svg>
-      Get Directions
+      <span data-t="get-directions">Get Directions</span>
     </a>
   </div>
 </section>
@@ -589,12 +597,12 @@ section,footer{padding:5rem 1.2rem;position:relative;text-align:center;}
 <!-- SIGNATURES -->
 <section id="signatures-section">
   <div class="reveal">
-    <span class="sec-label">Tag Our Moments</span>
-    <h2 class="sec-heading">Find Us</h2>
+    <span class="sec-label" data-t="sig-label">Tag Our Moments</span>
+    <h2 class="sec-heading" data-t="sig-heading">Find Us</h2>
   </div>
   <div class="hashtag-wrap reveal reveal-d1">
     <span class="hashtag-text">#Saksh</span>
-    <span class="hashtag-hint">share your memories with us</span>
+    <span class="hashtag-hint" data-t="hashtag-hint">share your memories with us</span>
   </div>
 </section>
 
@@ -606,17 +614,17 @@ section,footer{padding:5rem 1.2rem;position:relative;text-align:center;}
   </div>
 
   <div class="reveal reveal-d1">
-    <p class="wr-label">
+    <p class="wr-label" data-t="wr-label">
       Your presence will grace our sacred union with the warmth of love and positivity.<br/>
       Come, bestow your blessings, share our joy, and celebrate this beautiful new chapter with us!
     </p>
 
-    <div class="wr-regards">Warm regards,</div>
+    <div class="wr-regards" data-t="wr-regards">Warm regards,</div>
     <div class="wr-family">Gandhi Family &amp; Munot Family</div>
 
     <span class="wr-names">Yash &amp; Sakshi</span>
-    <div class="wr-hindi">&#x938;&#x93E;&#x926;&#x930; &#x906;&#x92E;&#x902;&#x924;&#x94D;&#x930;&#x923; &#x939;&#x948;</div>
-    <div class="wr-sub">&#x2736; &nbsp; With love &amp; blessings &nbsp; &#x2736;</div>
+    <div class="wr-hindi hi-only">&#x938;&#x93E;&#x926;&#x930; &#x906;&#x92E;&#x902;&#x924;&#x94D;&#x930;&#x923; &#x939;&#x948;</div>
+    <div class="wr-sub" data-t="wr-sub">&#x2736; &nbsp; With love &amp; blessings &nbsp; &#x2736;</div>
   </div>
 </footer>
 
@@ -624,6 +632,9 @@ section,footer{padding:5rem 1.2rem;position:relative;text-align:center;}
 
 <!-- Scroll progress bar -->
 <div id="progress-bar" aria-hidden="true"></div>
+
+<!-- Language toggle -->
+<button id="lang-btn" aria-label="Switch language" title="Switch language">HI</button>
 
 <!-- Music toggle -->
 <button id="audio-btn" aria-label="Mute music" title="Toggle music">
@@ -670,6 +681,7 @@ document.getElementById('entry-play-btn').addEventListener('click', function () 
     var btn = document.getElementById('audio-btn');
     btn.classList.add('show','playing');
     updateMusicBtn();
+    document.getElementById('lang-btn').classList.add('show');
   }, 900);
 
   setTimeout(startPetals, 1300);
@@ -730,6 +742,104 @@ function updateMusicBtn () {
   btn.classList.toggle('playing', !isMuted);
   btn.setAttribute('aria-label', isMuted ? 'Unmute music' : 'Mute music');
 }
+
+/* ═══ LANGUAGE ════════════════════════════════════════════ */
+var T = {
+  en: {
+    'youre-invited':   "You're Invited",
+    'tap-to-open':     'Tap to open',
+    'your-invitation': 'your invitation',
+    'shubh-vivah':     'Shubh Vivah',
+    'shubh-vivah-hero':'&#x2736; &nbsp; Shubh Vivah &nbsp; &#x2736;',
+    'with':            'with',
+    'hero-invite':     'Together they begin a journey of love,<br/>and together we celebrate this beautiful beginning.',
+    'scroll-explore':  'Scroll to explore',
+    'varmala-label':   'The Sacred Moment',
+    'varmala-heading': 'Varmala',
+    'varmala-sub':     'Two hearts, two garlands, one beautiful beginning',
+    'cd-quote':        'A lifetime of togetherness begins with one sacred step',
+    'cd-script':       'The Wedding Day',
+    'cd-days':         'Days',
+    'cd-hours':        'Hours',
+    'cd-mins':         'Mins',
+    'cd-secs':         'Secs',
+    'cd-done':         'The celebration has begun! &#x1F389;',
+    'gallery-label':   'The Couple',
+    'gallery-heading': 'Our Moments',
+    'gallery-sub':     'A glimpse of our journey together',
+    'ps-tap':          'tap to view',
+    'venue-label':     'The Destination',
+    'venue-heading':   'Venue',
+    'venue-address':   'Ahilyanagar, Pune&#x2013;Nagar Road<br/>Maharashtra, India',
+    'get-directions':  'Get Directions',
+    'sig-label':       'Tag Our Moments',
+    'sig-heading':     'Find Us',
+    'hashtag-hint':    'share your memories with us',
+    'wr-label':        'Your presence will grace our sacred union with the warmth of love and positivity.<br/>Come, bestow your blessings, share our joy, and celebrate this beautiful new chapter with us!',
+    'wr-regards':      'Warm regards,',
+    'wr-sub':          '&#x2736; &nbsp; With love &amp; blessings &nbsp; &#x2736;',
+    'lang-btn':        'HI'
+  },
+  hi: {
+    'youre-invited':   '&#x906;&#x92A; &#x906;&#x92E;&#x902;&#x924;&#x94D;&#x930;&#x93F;&#x924; &#x939;&#x948;&#x902;',
+    'tap-to-open':     '&#x916;&#x94B;&#x932;&#x928;&#x947; &#x915;&#x947; &#x932;&#x93F;&#x90F; &#x91F;&#x948;&#x92A; &#x915;&#x930;&#x947;&#x902;',
+    'your-invitation': '&#x906;&#x92A;&#x915;&#x93E; &#x928;&#x93F;&#x92E;&#x902;&#x924;&#x94D;&#x930;&#x923;',
+    'shubh-vivah':     '&#x936;&#x941;&#x092D; &#x935;&#x093F;&#x935;&#x093E;&#x939;',
+    'shubh-vivah-hero':'&#x2736; &nbsp; &#x936;&#x941;&#x092D; &#x935;&#x093F;&#x935;&#x093E;&#x939; &nbsp; &#x2736;',
+    'with':            '&#x914;&#x930;',
+    'hero-invite':     '&#x935;&#x947; &#x938;&#x93E;&#x925; &#x92E;&#x93F;&#x932;&#x915;&#x930; &#x092A;&#x094D;&#x930;&#x947;&#x92E; &#x915;&#x940; &#x090F;&#x915; &#x928;&#x908; &#x092F;&#x093E;&#x924;&#x094D;&#x930;&#x093E; &#x936;&#x941;&#x0930;&#x942; &#x0915;&#x0930; &#x0930;&#x0939;&#x0947; &#x0939;&#x0948;&#x0902;,<br/>&#x090F;&#x0935;&#x0902; &#x0939;&#x092E; &#x0938;&#x092C; &#x092E;&#x093F;&#x0932;&#x0915;&#x0930; &#x0907;&#x0938; &#x0916;&#x093C;&#x0942;&#x092C;&#x0938;&#x0942;&#x0930;&#x0924; &#x0936;&#x0941;&#x0930;&#x0941;&#x0906;&#x0924; &#x0915;&#x093E; &#x091C;&#x0936;&#x094D;&#x0928; &#x092E;&#x0928;&#x093E;&#x0924;&#x0947; &#x0939;&#x0948;&#x0902;&#x0964;',
+    'scroll-explore':  '&#x928;&#x940;&#x091A;&#x947; &#x926;&#x947;&#x916;&#x947;&#x902;',
+    'varmala-label':   '&#x92A;&#x935;&#x93F;&#x924;&#x94D;&#x930; &#x915;&#x94D;&#x937;&#x923;',
+    'varmala-heading': '&#x935;&#x930;&#x92E;&#x93E;&#x932;&#x93E;',
+    'varmala-sub':     '&#x926;&#x94B; &#x926;&#x93F;&#x932;, &#x926;&#x94B; &#x92E;&#x93E;&#x932;&#x93E;, &#x090F;&#x915; &#x916;&#x93C;&#x942;&#x092C;&#x938;&#x942;&#x930;&#x924; &#x936;&#x941;&#x0930;&#x0941;&#x0906;&#x0924;',
+    'cd-quote':        '&#x090F;&#x0915; &#x092A;&#x0935;&#x093F;&#x0924;&#x094D;&#x0930; &#x0915;&#x0926;&#x092E; &#x0938;&#x0947; &#x0936;&#x0941;&#x0930;&#x0942; &#x0939;&#x094B;&#x0924;&#x0940; &#x0939;&#x0948; &#x091C;&#x093C;&#x093F;&#x0928;&#x094D;&#x0926;&#x0917;&#x0940;&#x092D;&#x0930; &#x0915;&#x0940; &#x0938;&#x093E;&#x0925;&#x0917;&#x093E;&#x0925;&#x093E;',
+    'cd-script':       '&#x935;&#x093F;&#x935;&#x093E;&#x0939; &#x0915;&#x093E; &#x0926;&#x093F;&#x0928;',
+    'cd-days':         '&#x926;&#x093F;&#x0928;',
+    'cd-hours':        '&#x0918;&#x0902;&#x091F;&#x0947;',
+    'cd-mins':         '&#x092E;&#x093F;&#x0928;&#x091F;',
+    'cd-secs':         '&#x0938;&#x0947;&#x0915;&#x0902;&#x0921;',
+    'cd-done':         '&#x0909;&#x0924;&#x094D;&#x0938;&#x0935; &#x0936;&#x0941;&#x0930;&#x0942; &#x0939;&#x094B; &#x0917;&#x092F;&#x093E; &#x0939;&#x0948;! &#x1F389;',
+    'gallery-label':   '&#x091C;&#x094B;&#x0921;&#x93C;&#x0940;',
+    'gallery-heading': '&#x0939;&#x092E;&#x093E;&#x0930;&#x0947; &#x092A;&#x0932;',
+    'gallery-sub':     '&#x0939;&#x092E;&#x093E;&#x0930;&#x0940; &#x0938;&#x093E;&#x091D;&#x093E; &#x092F;&#x093E;&#x0924;&#x094D;&#x0930;&#x093E; &#x0915;&#x0940; &#x090F;&#x0915; &#x091D;&#x0932;&#x0915;',
+    'ps-tap':          '&#x0926;&#x0947;&#x0916;&#x0928;&#x0947; &#x0915;&#x0947; &#x0932;&#x093F;&#x090F; &#x091F;&#x0948;&#x092A; &#x0915;&#x0930;&#x0947;&#x0902;',
+    'venue-label':     '&#x0938;&#x094D;&#x0925;&#x093E;&#x0928;',
+    'venue-heading':   '&#x0935;&#x093F;&#x0935;&#x093E;&#x0939; &#x0938;&#x094D;&#x0925;&#x0932;',
+    'venue-address':   '&#x0905;&#x0939;&#x093F;&#x0932;&#x094D;&#x092F;&#x093E;&#x0928;&#x0917;&#x0930;, &#x092A;&#x0941;&#x0923;&#x0947;&#x2013;&#x0928;&#x0917;&#x0930; &#x0930;&#x094B;&#x0921;<br/>&#x092E;&#x0939;&#x093E;&#x0930;&#x093E;&#x0937;&#x094D;&#x091F;&#x094D;&#x0930;, &#x092D;&#x093E;&#x0930;&#x0924;',
+    'get-directions':  '&#x0930;&#x093E;&#x0938;&#x094D;&#x0924;&#x093E; &#x0926;&#x0947;&#x0916;&#x0947;&#x0902;',
+    'sig-label':       '&#x0939;&#x092E;&#x093E;&#x0930;&#x0947; &#x092A;&#x0932;&#x094B;&#x0902; &#x0915;&#x094B; &#x091F;&#x0948;&#x0917; &#x0915;&#x0930;&#x0947;&#x0902;',
+    'sig-heading':     '&#x0939;&#x092E;&#x0947;&#x0902; &#x0922;&#x0942;&#x0902;&#x0922;&#x0947;&#x0902;',
+    'hashtag-hint':    '&#x0905;&#x092A;&#x0928;&#x0940; &#x092F;&#x093E;&#x0926;&#x0947;&#x0902; &#x0939;&#x092E;&#x093E;&#x0930;&#x0947; &#x0938;&#x093E;&#x0925; &#x0938;&#x093E;&#x091D;&#x093E; &#x0915;&#x0930;&#x0947;&#x0902;',
+    'wr-label':        '&#x0906;&#x092A;&#x0915;&#x0940; &#x0909;&#x092A;&#x0938;&#x094D;&#x0925;&#x093F;&#x0924;&#x093F; &#x0939;&#x092E;&#x093E;&#x0930;&#x0947; &#x0907;&#x0938; &#x092A;&#x0935;&#x093F;&#x0924;&#x094D;&#x0930; &#x092C;&#x0902;&#x0927;&#x0928; &#x0915;&#x094B; &#x092A;&#x094D;&#x0930;&#x0947;&#x092E; &#x0914;&#x0930; &#x0938;&#x0915;&#x093E;&#x0930;&#x093E;&#x0924;&#x094D;&#x092E;&#x0915;&#x0924;&#x093E; &#x0938;&#x0947; &#x092E;&#x0939;&#x0915;&#x093E; &#x0926;&#x0947;&#x0917;&#x0940;&#x0964;<br/>&#x0906;&#x0907;&#x090F;, &#x0905;&#x092A;&#x0928;&#x093E; &#x0906;&#x0936;&#x0940;&#x0930;&#x094D;&#x0935;&#x093E;&#x0926; &#x0926;&#x0947;&#x0902;, &#x0939;&#x092E;&#x093E;&#x0930;&#x0940; &#x0916;&#x0941;&#x0936;&#x0940; &#x092E;&#x0947;&#x0902; &#x0936;&#x093E;&#x092E;&#x093F;&#x0932; &#x0939;&#x094B;&#x0902; &#x0914;&#x0930; &#x0907;&#x0938; &#x0928;&#x0908; &#x0936;&#x0941;&#x0930;&#x0941;&#x0906;&#x0924; &#x0915;&#x093E; &#x091C;&#x0936;&#x094D;&#x0928; &#x0939;&#x092E;&#x093E;&#x0930;&#x0947; &#x0938;&#x093E;&#x0925; &#x092E;&#x0928;&#x093E;&#x090F;&#x0902;!',
+    'wr-regards':      '&#x0938;&#x093E;&#x0926;&#x0930;,',
+    'wr-sub':          '&#x2736; &nbsp; &#x092A;&#x094D;&#x0930;&#x0947;&#x092E; &#x0914;&#x0930; &#x0906;&#x0936;&#x0940;&#x0930;&#x094D;&#x0935;&#x093E;&#x0926; &#x0938;&#x0939;&#x093F;&#x0924; &nbsp; &#x2736;',
+    'lang-btn':        'EN'
+  }
+};
+
+var currentLang = 'en';
+
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('lang', lang);
+  document.documentElement.lang = lang;
+  document.body.classList.toggle('lang-hi', lang === 'hi');
+  document.querySelectorAll('[data-t]').forEach(function(el) {
+    var v = T[lang][el.getAttribute('data-t')];
+    if (v !== undefined) el.innerHTML = v;
+  });
+}
+
+/* Auto-detect on load */
+(function() {
+  var saved    = localStorage.getItem('lang');
+  var detected = (navigator.language || '').toLowerCase().startsWith('hi') ? 'hi' : 'en';
+  setLang(saved || detected);
+}());
+
+document.getElementById('lang-btn').addEventListener('click', function() {
+  setLang(currentLang === 'en' ? 'hi' : 'en');
+});
 
 /* ═══ ENTRY GATE SPARKLES ═════════════════════════════════ */
 (function () {

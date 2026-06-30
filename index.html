@@ -531,31 +531,15 @@ section,footer{padding:5rem 1.2rem;position:relative;text-align:center;}
     <div class="photo-slide" onclick="openLb(0)">
       <img src="us1.jpeg" alt="Yash &amp; Sakshi" loading="eager"/>
       <div class="photo-slide-caption">
-        <span class="ps-num">01 &nbsp;/&nbsp; 04</span>
+        <span class="ps-num">01 &nbsp;/&nbsp; 02</span>
         <span class="ps-name">Yash &amp; Sakshi</span>
         <span class="ps-tap">tap to view</span>
       </div>
     </div>
     <div class="photo-slide" onclick="openLb(1)">
-      <img src="us2.jpeg" alt="Yash &amp; Sakshi" loading="lazy"/>
-      <div class="photo-slide-caption">
-        <span class="ps-num">02 &nbsp;/&nbsp; 04</span>
-        <span class="ps-name">Yash &amp; Sakshi</span>
-        <span class="ps-tap">tap to view</span>
-      </div>
-    </div>
-    <div class="photo-slide" onclick="openLb(2)">
       <img src="us3.jpeg" alt="Yash &amp; Sakshi" loading="lazy"/>
       <div class="photo-slide-caption">
-        <span class="ps-num">03 &nbsp;/&nbsp; 04</span>
-        <span class="ps-name">Yash &amp; Sakshi</span>
-        <span class="ps-tap">tap to view</span>
-      </div>
-    </div>
-    <div class="photo-slide" onclick="openLb(3)">
-      <img src="us4.jpeg" alt="Yash &amp; Sakshi" loading="lazy"/>
-      <div class="photo-slide-caption">
-        <span class="ps-num">04 &nbsp;/&nbsp; 04</span>
+        <span class="ps-num">02 &nbsp;/&nbsp; 02</span>
         <span class="ps-name">Yash &amp; Sakshi</span>
         <span class="ps-tap">tap to view</span>
       </div>
@@ -581,7 +565,7 @@ section,footer{padding:5rem 1.2rem;position:relative;text-align:center;}
   </div>
 
   <div class="venue-card reveal reveal-d1">
-    <span class="venue-name-big">Sweet Home</span>
+    <span class="venue-name-big">Sweet Home Fun N Food</span>
     <div class="venue-address">
       Ahilyanagar, Pune&#x2013;Nagar Road<br/>Maharashtra, India
     </div>
@@ -832,7 +816,7 @@ function tick(){
 tick(); setInterval(tick,1000);
 
 /* ═══ LIGHTBOX ════════════════════════════════════════════ */
-var lbSrcs = ['us1.jpeg','us2.jpeg','us3.jpeg','us4.jpeg'];
+var lbSrcs = ['us1.jpeg','us3.jpeg'];
 var lbIdx = 0;
 function openLb(i) {
   lbIdx = i;
